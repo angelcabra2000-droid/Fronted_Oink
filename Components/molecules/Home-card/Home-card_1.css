@@ -18,3 +18,29 @@
     flex-direction: column;
     gap: var(--space-xs);
 }
+
+.stat-card-balance {
+    background: var(--color-balance-claro);
+}
+
+.stat-card-income {
+    border: 2px solid var(--color-income-claro);
+
+}
+
+.stat-card-expense {
+    background: var(--color-expense-claro);
+}
+
+.stat-card-debt {
+    background: var(--color-debt-claro);
+}
+
+.stat-card-savings {
+    background: var(--color-savings-claro);
+}
+
+.stat-card-border {
+    border: 2px solid var(--color-border);
+
+}

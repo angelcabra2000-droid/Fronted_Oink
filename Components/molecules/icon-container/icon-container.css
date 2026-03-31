@@ -29,6 +29,10 @@
     background: var(--color-debt-claro);
 }
 
+.icon-bg-savings {
+    background: var(--color-savings-claro);
+}
+
 /* ICONO ENCIMA */
 .icon-container .icon {
     position: absolute;

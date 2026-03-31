@@ -21,6 +21,10 @@
     filter: var(--filter-debt);
 }
 
+.icon-savings {
+    filter: var(--filter-savings);
+}
+
 
 /* TAMAÑOS */
 .icon-sm {

@@ -79,6 +79,10 @@
     color: var(--color-debt);
 }
 
+.text-savings {
+    color: var(--color-savings);
+}
+
 .text-light {
     color: var(--color-text-light);
 }
@@ -100,4 +104,8 @@
 
 .title-debt {
     color: var(--color-debt);
+}
+
+.title-savings {
+    color: var(--color-savings);
 }

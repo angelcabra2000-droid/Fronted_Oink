@@ -45,7 +45,14 @@
 
 .btn-debt {
 
-    background: var(--color-debt);
+    background: var(--color-savings);
+    color: var(--color-white);
+
+}
+
+.btn-savings {
+
+    background: var(--color-savings);
     color: var(--color-white);
 
 }

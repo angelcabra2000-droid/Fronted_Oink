@@ -46,3 +46,7 @@
 .chart-bar-item.bg-balance {
     background: var(--color-balance);
 }
+
+.chart-bar-item.bg-savings {
+    background: var(--color-savings);
+}
