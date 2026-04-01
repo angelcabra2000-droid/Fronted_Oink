@@ -1,0 +1,8 @@
+.charts-row {
+    display: flex;
+    gap: 16px;
+}
+
+.charts-row .chart-summary-card {
+    flex: 1;
+}

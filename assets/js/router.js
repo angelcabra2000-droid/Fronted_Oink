@@ -48,6 +48,202 @@ async function loadPage(page) {
             });
         }
 
+        const chartEl = document.getElementById('ingresos-gastos-chart');
+        if (chartEl) {
+            new Chart(chartEl, {
+                type: 'bar',
+                data: {
+                    labels: ['Ingresos', 'Gastos'],
+                    datasets: [{
+                        data: [100000, 50000],
+                        backgroundColor: [
+                            'rgba(0, 166, 62, 0.9)',
+                            'rgba(231, 0, 11, 0.9)'
+                        ],
+                        borderRadius: 6,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            border: { display: false },
+                        },
+                        y: {
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            border: { display: false },
+                        }
+                    }
+                }
+            });
+        }
+
+        // Gastos por categoría
+        const gastosEl = document.getElementById('gastos-categoria-chart');
+        if (gastosEl) {
+            const gastosData = {
+                labels: ['Alimentación', 'Transporte', 'Vivienda', 'Salud', 'Entretenimiento', 'Otro'],
+                datasets: [{
+                    data: [30, 20, 25, 10, 8, 7],
+                    backgroundColor: [
+                        '#E7000B',
+                        '#F97316',
+                        '#EAB308',
+                        '#EC4899',
+                        '#8B5CF6',
+                        '#6B7280',
+                    ],
+                    borderWidth: 0,
+                }]
+            };
+
+            new Chart(gastosEl, {
+                type: 'pie',
+                data: gastosData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ` ${ctx.label}: ${ctx.parsed}%`
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Leyenda manual
+            const gastosLegend = document.getElementById('gastos-legend');
+            gastosData.labels.forEach((label, i) => {
+                gastosLegend.innerHTML += `
+            <li>
+                <div class="chart-legend-label">
+                    <div class="chart-legend-dot" style="background:${gastosData.datasets[0].backgroundColor[i]}"></div>
+                    <span class="text text-main2">${label}</span>
+                </div>
+                <span class="text text-main2">$0.00</span>
+            </li>`;
+            });
+        }
+
+        // Ingresos por categoría
+        const ingresosEl = document.getElementById('ingresos-categoria-chart');
+        if (ingresosEl) {
+            const ingresosData = {
+                labels: ['Salario', 'Freelance', 'Inversiones', 'Alquiler', 'Negocio', 'Otro'],
+                datasets: [{
+                    data: [50, 20, 15, 8, 5, 2],
+                    backgroundColor: [
+                        '#00A63E',
+                        '#16A34A',
+                        '#4ADE80',
+                        '#86EFAC',
+                        '#BBF7D0',
+                        '#6B7280',
+                    ],
+                    borderWidth: 0,
+                }]
+            };
+
+            new Chart(ingresosEl, {
+                type: 'pie',
+                data: ingresosData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ` ${ctx.label}: ${ctx.parsed}%`
+                            }
+                        }
+                    }
+                }
+            });
+
+            const ingresosLegend = document.getElementById('ingresos-legend');
+            ingresosData.labels.forEach((label, i) => {
+                ingresosLegend.innerHTML += `
+            <li>
+                <div class="chart-legend-label">
+                    <div class="chart-legend-dot" style="background:${ingresosData.datasets[0].backgroundColor[i]}"></div>
+                    <span class="text text-main2">${label}</span>
+                </div>
+                <span class="text text-main2">$0.00</span>
+            </li>`;
+            });
+        }
+
+        const tendenciasEl = document.getElementById('tendencias-chart');
+        if (tendenciasEl) {
+            new Chart(tendenciasEl, {
+                type: 'line',
+                data: {
+                    labels: ['Sept 2025', 'Oct 2025', 'Nov 2025', 'Dic 2025', 'Ene 2026', 'Feb 2026'],
+                    datasets: [
+                        {
+                            label: 'Ingresos',
+                            data: [0, 0, 0, 0, 5000, 100000],
+                            borderColor: '#00A63E',
+                            backgroundColor: 'rgba(0, 166, 62, 0.05)',
+                            pointBackgroundColor: '#ffffff',
+                            pointBorderColor: '#00A63E',
+                            pointRadius: 5,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                        {
+                            label: 'Gastos',
+                            data: [0, 0, 0, 0, 2000, 50000],
+                            borderColor: '#E7000B',
+                            backgroundColor: 'rgba(231, 0, 11, 0.05)',
+                            pointBackgroundColor: '#ffffff',
+                            pointBorderColor: '#E7000B',
+                            pointRadius: 5,
+                            tension: 0.4,
+                            fill: true,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                font: { family: 'Inter', size: 12 },
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            border: { display: false },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            border: { display: false },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
     } catch (error) {
         mainContent.innerHTML = '<p>Error al cargar la página.</p>';
     }

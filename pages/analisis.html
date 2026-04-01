@@ -1,0 +1,52 @@
+<div class="history-card">
+    <h2 class="subtitle">Analisis Financiero</h2>
+
+    <div class="chart-summary-card">
+        <span class="subtitle">Ingresos vs Gastos</span>
+
+        <div class="chart-wrapper">
+            <canvas id="ingresos-gastos-chart"></canvas>
+        </div>
+
+        <div class="financial-state-item">
+            <span class="text text-main2">Total de Ingresos:</span>
+            <span class="text text-main2 text-income">$0</span>
+        </div>
+        <div class="financial-state-item">
+            <span class="text text-main2">Total de Gastos:</span>
+            <span class="text text-main2 text-expense">$0</span>
+        </div>
+        <div class="financial-state-item financial-state-total">
+            <span class="text text-main" style="font-weight: 600;">Balance Neto:</span>
+            <span class="text text-main text-balance" style="font-weight: 600;">$0,0</span>
+        </div>
+    </div>
+
+    <!-- Gastos por categoría -->
+    <div class="charts-row">
+        <!-- Gastos por categoría -->
+        <div class="chart-summary-card">
+            <span class="subtitle">Gastos por Categoría</span>
+            <div class="chart-wrapper">
+                <canvas id="gastos-categoria-chart"></canvas>
+            </div>
+            <ul class="chart-legend" id="gastos-legend"></ul>
+        </div>
+
+        <!-- Ingresos por categoría -->
+        <div class="chart-summary-card">
+            <span class="subtitle">Ingresos por Categoría</span>
+            <div class="chart-wrapper">
+                <canvas id="ingresos-categoria-chart"></canvas>
+            </div>
+            <ul class="chart-legend" id="ingresos-legend"></ul>
+        </div>
+    </div>
+
+    <div class="chart-summary-card">
+        <span class="subtitle">Tendencias de los últimos 6 meses</span>
+        <div class="chart-wrapper">
+            <canvas id="tendencias-chart"></canvas>
+        </div>
+    </div>
+</div>
