@@ -63,3 +63,9 @@
     color: var(--color-title);
 
 }
+
+.btn-register {
+
+    border: 1px solid var(--color-text);
+
+}

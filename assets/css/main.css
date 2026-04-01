@@ -40,6 +40,7 @@
    ORGANISMS
 ========================= */
 @import url("../../components/organims/navegation/navegation.css");
+@import url("../../components/organims/navegation/landing-nav.css");
 @import url("../../components/organims/profiles/profiles.css");
 @import url("../../components/organims/Home/Cards_1.css");
 @import url("../../components/organims/Home/analysis-row.css");

@@ -1,0 +1,17 @@
+.landing-nav {
+    display: flex;
+    flex-direction: column;
+
+    padding: 12px;
+
+    width: 100%;
+
+    height: fit-content;
+
+    background: white;
+
+    border-radius: 10px;
+
+    gap: 8px;
+
+}

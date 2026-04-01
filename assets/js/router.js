@@ -1,11 +1,31 @@
 const navItems = document.querySelectorAll('.nav-item');
 const mainContent = document.getElementById('main-content');
 
+// 👇 NUEVO: referencias de los dos modos del sidebar
+const landingNav = document.getElementById("landing-nav");
+const appNav = document.getElementById("app-nav");
+
 async function loadPage(page) {
     try {
+
+        // =========================
+        // 🔁 CAMBIO DE MODO
+        // =========================
+        if (page === "landing") {
+            if (landingNav) landingNav.style.display = "flex";
+            if (appNav) appNav.style.display = "none";
+        } else {
+            if (landingNav) landingNav.style.display = "none";
+            if (appNav) appNav.style.display = "block";
+        }
+
         const response = await fetch(`pages/${page}.html`);
         const html = await response.text();
         mainContent.innerHTML = html;
+
+        // =========================
+        // 🧩 LIBRERIAS
+        // =========================
 
         // TomSelect
         const selectEl = document.querySelector('#categoria-select');
@@ -29,14 +49,25 @@ async function loadPage(page) {
 }
 
 
+// =========================
+// 🎯 EVENTOS GLOBALES
+// =========================
 document.addEventListener("click", (e) => {
+
+    // =========================
+    // 🚀 BOTÓN LANDING → ENTRAR
+    // =========================
+    if (e.target.closest("#btn-start")) {
+        loadPage("home");
+
+        navItems.forEach(n => n.classList.remove('active'));
+        document.querySelector('[data-page="home"]')?.classList.add('active');
+    }
 
     // =========================
     // 🟢 INGRESOS
     // =========================
     if (e.target.closest(".btn-edit-income")) {
-        console.log("CLICK EDIT INCOME");
-
         const card = e.target.closest(".history-card");
         card.querySelector(".form-income")?.classList.add("active");
     }
@@ -70,7 +101,7 @@ document.addEventListener("click", (e) => {
     }
 
     // =========================
-    // 🟣  AHORROS
+    // 🟣 AHORROS
     // =========================
     if (e.target.closest(".btn-add-savings")) {
         const card = e.target.closest(".history-card");
@@ -83,6 +114,10 @@ document.addEventListener("click", (e) => {
 
 });
 
+
+// =========================
+// 🧭 NAVEGACIÓN NORMAL
+// =========================
 navItems.forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
@@ -95,4 +130,8 @@ navItems.forEach(item => {
     });
 });
 
-loadPage('home');
+
+// =========================
+// 🟢 INICIO DE LA APP
+// =========================
+loadPage('landing');
