@@ -109,6 +109,20 @@ document.addEventListener("click", (e) => {
     }
 
     // =========================
+    // 🔄 LOGIN → REGISTER
+    // =========================
+    if (e.target.closest("#btn-go-register-from-login")) {
+        loginModal?.classList.add("hidden");
+        registerModal?.classList.remove("hidden");
+    }
+    // =========================
+    // 🔄 REGISTER → LOGIN
+    // =========================
+    if (e.target.closest("#btn-go-login-from-register")) {
+        registerModal?.classList.add("hidden");
+        loginModal?.classList.remove("hidden");
+    }
+    // =========================
     // ❌ CERRAR REGISTER (overlay)
     // =========================
     if (e.target.closest("#register-modal .modal-overlay")) {
