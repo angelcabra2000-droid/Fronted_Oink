@@ -84,3 +84,8 @@
 .flatpickr-calendar span {
     color: inherit;
 }
+
+.flatpickr-input {
+    padding: 8px 12px;
+    /* 👈 igual que .input */
+}

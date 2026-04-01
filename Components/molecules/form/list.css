@@ -2,12 +2,13 @@
 .ts-wrapper .ts-control {
     border: 1px solid var(--color-text);
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 8px 20px;
     font-family: var(--font-primary);
     font-size: 14px;
     color: var(--color-title);
     background: none;
     box-shadow: none;
+    min-height: unset;
 }
 
 .ts-wrapper.single .ts-control,
