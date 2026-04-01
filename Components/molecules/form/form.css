@@ -42,16 +42,41 @@
 
 .form-income {
     background: var(--color-income-claro);
+    display: none;
+}
+
+.form-income.active {
+    display: block;
 }
 
 .form-expense {
     background: var(--color-expense-claro);
+    display: none;
+}
+
+.form-expense {
+    display: none;
+}
+
+.form-expense.active {
+    display: block;
 }
 
 .form-debt {
     background: var(--color-debt-claro);
+    display: none;
+}
+
+.form-debt.active {
+    display: block;
 }
 
 .form-savings {
     background: var(--color-savings-claro);
+    display: none;
+}
+
+
+.form-savings.active {
+    display: block;
 }

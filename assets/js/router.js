@@ -28,6 +28,61 @@ async function loadPage(page) {
     }
 }
 
+
+document.addEventListener("click", (e) => {
+
+    // =========================
+    // 🟢 INGRESOS
+    // =========================
+    if (e.target.closest(".btn-edit-income")) {
+        console.log("CLICK EDIT INCOME");
+
+        const card = e.target.closest(".history-card");
+        card.querySelector(".form-income")?.classList.add("active");
+    }
+
+    if (e.target.closest(".btn-cancel-income")) {
+        e.target.closest(".form-income")?.classList.remove("active");
+    }
+
+    // =========================
+    // 🔴 GASTOS
+    // =========================
+    if (e.target.closest(".btn-edit-expense")) {
+        const card = e.target.closest(".history-card");
+        card.querySelector(".form-expense")?.classList.add("active");
+    }
+
+    if (e.target.closest(".btn-cancel-expense")) {
+        e.target.closest(".form-expense")?.classList.remove("active");
+    }
+
+    // =========================
+    // 🟣 DEUDAS
+    // =========================
+    if (e.target.closest(".btn-add-debt")) {
+        const card = e.target.closest(".history-card");
+        card.querySelector(".form-debt")?.classList.add("active");
+    }
+
+    if (e.target.closest(".btn-cancel-debt")) {
+        e.target.closest(".form-debt")?.classList.remove("active");
+    }
+
+    // =========================
+    // 🟣  AHORROS
+    // =========================
+    if (e.target.closest(".btn-add-savings")) {
+        const card = e.target.closest(".history-card");
+        card.querySelector(".form-savings")?.classList.add("active");
+    }
+
+    if (e.target.closest(".btn-cancel-savings")) {
+        e.target.closest(".form-savings")?.classList.remove("active");
+    }
+
+});
+
 navItems.forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
