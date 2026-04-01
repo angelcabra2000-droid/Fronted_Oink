@@ -10,8 +10,42 @@
     border-radius: 10px;
 }
 
+.history-card-login {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 32px;
+
+    background: white;
+    border-radius: 16px;
+
+    width: 100%;
+    max-width: 420px;
+
+
+}
+
 .history-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.history-card-login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+
+    padding: var(--space-lg);
+
+    background: var(--color-white);
+    border-radius: 10px;
+
+    align-items: center;
+    /* centra horizontal */
+    justify-content: center;
+    /* centra vertical (si hay espacio) */
+    text-align: center;
+    /* centra texto */
 }

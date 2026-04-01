@@ -45,7 +45,7 @@
 
 .btn-debt {
 
-    background: var(--color-savings);
+    background: var(--color-debt);
     color: var(--color-white);
 
 }
@@ -61,5 +61,11 @@
 
     background: var(--color-white);
     color: var(--color-title);
+
+}
+
+.btn-register {
+
+    border: 1px solid var(--color-text-light);
 
 }

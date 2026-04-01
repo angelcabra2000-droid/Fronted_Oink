@@ -85,4 +85,12 @@
     --filter-expense: brightness(0) saturate(100%) invert(19%) sepia(97%) saturate(6000%) hue-rotate(355deg);
     --filter-debt: brightness(0) saturate(100%) invert(30%) sepia(99%) saturate(2000%) hue-rotate(260deg);
     --filter-savings: brightness(0) saturate(100%) invert(58%) sepia(95%) saturate(1500%) hue-rotate(350deg);
+
+    /* =========================
+    TOM SELECT
+    ========================= */
+    --ts-focus-color: var(--color-income);
+    --ts-hover-bg: rgba(0, 166, 62, 0.1);
+    --ts-hover-color: var(--color-income);
+
 }

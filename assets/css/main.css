@@ -32,11 +32,15 @@
 @import url("../../components/molecules/Home-card/chart-card.css");
 @import url("../../components/molecules/historial-card/historial-card.css");
 @import url("../../components/molecules/debt-item/debt-item.css");
+@import url("../../components/molecules/form/form.css");
+@import url("../../components/molecules/form/fecha.css");
+@import url("../../components/molecules/form/list.css");
 
 /* =========================
    ORGANISMS
 ========================= */
 @import url("../../components/organims/navegation/navegation.css");
+@import url("../../components/organims/navegation/landing-nav.css");
 @import url("../../components/organims/profiles/profiles.css");
 @import url("../../components/organims/Home/Cards_1.css");
 @import url("../../components/organims/Home/analysis-row.css");
