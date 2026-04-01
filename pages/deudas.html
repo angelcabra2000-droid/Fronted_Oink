@@ -7,6 +7,55 @@
         </button>
     </div>
 
+    <div class="form form-debt">
+        <div class="fields">
+            <div class="field">
+                <span class="text text-secondary">Nombre</span>
+                <input class="input" placeholder="Nombre">
+            </div>
+
+            <div class="field">
+                <span class="text text-secondary">Total Monto</span>
+                <input class="input" placeholder="Total Monto">
+            </div>
+
+            <div class="field">
+                <span class="text text-secondary">Monto Restante</span>
+                <input class="input" placeholder="Monto Restante">
+            </div>
+
+            <div class="field">
+                <span class="text text-secondary">Categoria</span>
+                <select id="categoria-select">
+                    <option value="" disabled selected>Selecciona una categoría</option>
+                    <option value="tarjeta">Tarjeta de crédito</option>
+                    <option value="prestamo">Préstamo personal</option>
+                    <option value="hipoteca">Hipoteca</option>
+                    <option value="vehiculo">Crédito vehículo</option>
+                    <option value="estudiantil">Préstamo estudiantil</option>
+                    <option value="familiar">Deuda familiar</option>
+                    <option value="negocio">Deuda de negocio</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <span class="text text-secondary">Fecha de Vencimiento</span>
+                <input class="input input-date" placeholder="Selecciona una fecha" readonly>
+            </div>
+
+            <div class="field">
+                <span class="text text-secondary">Tasa de interes</span>
+                <input class="input" placeholder="Tasa de interes">
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-debt">Guardar</button>
+            <button class="btn btn-base btn-cancel-debt">Cancelar</button>
+        </div>
+    </div>
+
     <div class="debt-item">
         <div class="debt-item-header">
             <div class="history-item-info">
@@ -58,52 +107,4 @@
         </div>
     </div>
 
-    <div class="form form-debt">
-        <div class="fields">
-            <div class="field">
-                <span class="text text-secondary">Nombre</span>
-                <input class="input" placeholder="Nombre">
-            </div>
-
-            <div class="field">
-                <span class="text text-secondary">Total Monto</span>
-                <input class="input" placeholder="Total Monto">
-            </div>
-
-            <div class="field">
-                <span class="text text-secondary">Monto Restante</span>
-                <input class="input" placeholder="Monto Restante">
-            </div>
-
-            <div class="field">
-                <span class="text text-secondary">Categoria</span>
-                <select id="categoria-select">
-                    <option value="" disabled selected>Selecciona una categoría</option>
-                    <option value="tarjeta">Tarjeta de crédito</option>
-                    <option value="prestamo">Préstamo personal</option>
-                    <option value="hipoteca">Hipoteca</option>
-                    <option value="vehiculo">Crédito vehículo</option>
-                    <option value="estudiantil">Préstamo estudiantil</option>
-                    <option value="familiar">Deuda familiar</option>
-                    <option value="negocio">Deuda de negocio</option>
-                    <option value="otro">Otro</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <span class="text text-secondary">Fecha de Vencimiento</span>
-                <input class="input input-date" placeholder="Selecciona una fecha" readonly>
-            </div>
-
-            <div class="field">
-                <span class="text text-secondary">Tasa de interes</span>
-                <input class="input" placeholder="Tasa de interes">
-            </div>
-        </div>
-
-        <div class="actions">
-            <button class="btn btn-debt">Guardar</button>
-            <button class="btn btn-base btn-cancel-debt">Cancelar</button>
-        </div>
-    </div>
 </div>
