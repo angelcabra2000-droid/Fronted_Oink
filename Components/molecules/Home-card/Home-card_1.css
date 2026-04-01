@@ -6,8 +6,7 @@
 
     padding: var(--space-lg);
     /* 24px por todos lados */
-
-    background: var(--color-white);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
 
     height: fit-content;
@@ -38,9 +37,4 @@
 
 .stat-card-savings {
     background: var(--color-savings-claro);
-}
-
-.stat-card-border {
-    border: 2px solid var(--color-border);
-
 }

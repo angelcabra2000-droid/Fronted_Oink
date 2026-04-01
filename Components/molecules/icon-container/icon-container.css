@@ -33,6 +33,27 @@
     background: var(--color-savings-claro);
 }
 
+
+.icon-income-solid {
+    background: var(--color-income);
+}
+
+.icon-balance-solid {
+    background: var(--color-balance);
+}
+
+.icon-expense-solid {
+    background: var(--color-expense);
+}
+
+.icon-debt-solid {
+    background: var(--color-debt);
+}
+
+.icon-savings-solid {
+    background: var(--color-savings);
+}
+
 /* ICONO ENCIMA */
 .icon-container .icon {
     position: absolute;
