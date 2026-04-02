@@ -257,6 +257,13 @@ async function loadPage(page) {
 document.addEventListener("click", (e) => {
 
     // =========================
+    // 👤 ABRIR MODAL PERFIL
+    // =========================
+    if (e.target.closest(".profile-add")) {
+        document.getElementById("profile-modal")?.classList.remove("hidden");
+    }
+
+    // =========================
     // 🔐 ABRIR MODAL LOGIN
     // =========================
     if (e.target.closest("#btn-go-login")) {
@@ -361,6 +368,13 @@ document.addEventListener("click", (e) => {
         forgotModal?.classList.add("hidden"); // 👈
     }
 
+    if (e.target.closest("#profile-modal .modal-overlay") ||
+        e.target.closest("#profile-modal .modal-close") ||
+        e.target.closest("#btn-cancel-profile")) {
+
+        document.getElementById("profile-modal")?.classList.add("hidden");
+    }
+
     // =========================
     // 🔴 LOGOUT
     // =========================
@@ -423,6 +437,51 @@ document.addEventListener("click", (e) => {
 
     if (e.target.closest(".btn-cancel-savings")) {
         e.target.closest(".form-savings")?.classList.remove("active");
+    }
+
+    // =========================
+    // 👤 PERFIL
+    // =========================
+
+    // Abrir modal
+    if (e.target.closest(".profile-add")) {
+        document.getElementById("profile-modal")?.classList.remove("hidden");
+    }
+
+    // Cerrar modal
+    if (e.target.closest("#profile-modal .modal-overlay") ||
+        e.target.closest("#profile-modal .modal-close") ||
+        e.target.closest("#btn-cancel-profile")) {
+
+        document.getElementById("profile-modal")?.classList.add("hidden");
+    }
+
+    // Crear perfil
+    if (e.target.closest("#btn-create-profile")) {
+
+        const input = document.getElementById("profile-name");
+        const name = input.value.trim();
+
+        if (!name) return;
+
+        const list = document.querySelector(".profiles-list");
+        if (!list) return; // 👈 importante
+
+        const firstLetter = name.charAt(0).toUpperCase();
+
+        const newProfile = document.createElement("div");
+        newProfile.classList.add("profile-item");
+
+        newProfile.innerHTML = `
+        <div class="profile-avatar">${firstLetter}</div>
+        <span class="text text-main2">${name}</span>
+    `;
+
+        list.appendChild(newProfile);
+
+        input.value = "";
+
+        document.getElementById("profile-modal")?.classList.add("hidden");
     }
 
 });

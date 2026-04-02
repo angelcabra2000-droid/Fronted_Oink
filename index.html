@@ -54,14 +54,6 @@
                             <div class="profile-avatar">J</div>
                             <span class="text text-main2">Juan</span>
                         </div>
-                        <div class="profile-item">
-                            <div class="profile-avatar">A</div>
-                            <span class="text text-main2">Ana</span>
-                        </div>
-                        <div class="profile-item">
-                            <div class="profile-avatar">M</div>
-                            <span class="text text-main2">Maria</span>
-                        </div>
                     </div>
                     <div class="profile-add">
                         <img src="assets/icons/user-plus.svg" class="icon">
@@ -234,6 +226,32 @@
 
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="profile-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">Crear perfil</h2>
+
+            <div class="form form-balance">
+                <div class="fields-login">
+
+                    <div class="field">
+                        <span class="text text-secondary">Nombre del perfil</span>
+                        <input id="profile-name" class="input" placeholder="Ej: Juan">
+                    </div>
+
+                    <div class="field">
+                        <button id="btn-create-profile" class="btn btn-base">Crear perfil</button>
+                        <button id="btn-cancel-profile" class="btn btn-balance">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 
