@@ -1,46 +1,37 @@
 .profile-item {
-
     display: flex;
     align-items: center;
-
     gap: 12px;
+    color: white;
 
     height: 45px;
     width: 100%;
 
     padding: 0 16px;
-
     border-radius: 10px;
 
-    background-color: rgb(var(--profile-color), 0.4);
+    /* 🔥 50% del color */
+    background: color-mix(in srgb, var(--profile-color) 50%, transparent);
 
     cursor: pointer;
-
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
 }
 
-/* HOVER Y ACTIVO */
-
+/* ACTIVO / HOVER → 100% */
 .profile-item:hover,
 .profile-item.active {
-
-    background: rgb(var(--profile-color));
-
+    background: var(--profile-color);
 }
 
-/* TEXTO BLANCO EN HOVER */
-
+/* TEXTO */
 .profile-item:hover .text,
 .profile-item.active .text {
-
     color: white;
-
 }
 
+/* AVATAR */
 .profile-item:hover .profile-avatar,
 .profile-item.active .profile-avatar {
-
     border-color: white;
     color: white;
-
 }

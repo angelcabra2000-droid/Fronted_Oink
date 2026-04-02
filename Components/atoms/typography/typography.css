@@ -85,6 +85,11 @@
 
 .text-light {
     color: var(--color-text-light);
+
+}
+
+.text-white {
+    color: white;
 }
 
 /* =========================
@@ -108,4 +113,13 @@
 
 .title-savings {
     color: var(--color-savings);
+}
+
+.link-text {
+    cursor: pointer;
+    transition: color var(--transition-fast) ease;
+}
+
+.link-text:hover {
+    color: var(--color-balance);
 }

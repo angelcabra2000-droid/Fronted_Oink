@@ -67,9 +67,29 @@
    Color Perfiles
 ========================= */
 
-    --profile-color: 168, 202, 126;
-    --profile-color-blue: 140, 180, 240;
-    --profile-color-purple: 190, 150, 230;
+    --color-primary: var(--color-1);
+
+    --color-1: #E11D2E;
+    /* rojo */
+    --color-2: #F97316;
+    /* naranja */
+    --color-3: #EAB308;
+    /* amarillo */
+    --color-4: #22C55E;
+    /* verde */
+    --color-5: #06B6D4;
+    /* cyan */
+    --color-6: #3B82F6;
+    /* azul */
+    --color-7: #6366F1;
+    /* índigo */
+    --color-8: #A855F7;
+    /* morado */
+    --color-9: #EC4899;
+    /* rosado */
+    --color-10: #F43F5E;
+    /* rosa fuerte */
+
     /* =========================
    TRANSICIONES
 ========================= */

@@ -8,6 +8,32 @@ const appNav = document.getElementById("app-nav");
 // Modal login
 const loginModal = document.getElementById("login-modal");
 const registerModal = document.getElementById("register-modal");
+const forgotModal = document.getElementById("forgot-modal");
+
+const setPrimaryColor = (color) => {
+    document.documentElement.style.setProperty('--color-primary', color);
+};
+
+// =========================
+// 🎨 HELPERS DE COLORES
+// =========================
+const getColor = (varName) =>
+    getComputedStyle(document.documentElement)
+        .getPropertyValue(varName)
+        .trim();
+
+const palette = [
+    getColor('--color-1'),
+    getColor('--color-2'),
+    getColor('--color-3'),
+    getColor('--color-4'),
+    getColor('--color-5'),
+    getColor('--color-6'),
+    getColor('--color-7'),
+    getColor('--color-8'),
+    getColor('--color-9'),
+    getColor('--color-10'),
+];
 
 // =========================
 // 📦 CARGA DE PÁGINAS
@@ -57,8 +83,8 @@ async function loadPage(page) {
                     datasets: [{
                         data: [100000, 50000],
                         backgroundColor: [
-                            'rgba(0, 166, 62, 0.9)',
-                            'rgba(231, 0, 11, 0.9)'
+                            getColor('--color-4'),
+                            getColor('--color-1')
                         ],
                         borderRadius: 6,
                         borderSkipped: false,
@@ -90,14 +116,7 @@ async function loadPage(page) {
                 labels: ['Alimentación', 'Transporte', 'Vivienda', 'Salud', 'Entretenimiento', 'Otro'],
                 datasets: [{
                     data: [30, 20, 25, 10, 8, 7],
-                    backgroundColor: [
-                        '#E7000B',
-                        '#F97316',
-                        '#EAB308',
-                        '#EC4899',
-                        '#8B5CF6',
-                        '#6B7280',
-                    ],
+                    backgroundColor: palette.slice(0, 6),
                     borderWidth: 0,
                 }]
             };
@@ -140,14 +159,7 @@ async function loadPage(page) {
                 labels: ['Salario', 'Freelance', 'Inversiones', 'Alquiler', 'Negocio', 'Otro'],
                 datasets: [{
                     data: [50, 20, 15, 8, 5, 2],
-                    backgroundColor: [
-                        '#00A63E',
-                        '#16A34A',
-                        '#4ADE80',
-                        '#86EFAC',
-                        '#BBF7D0',
-                        '#6B7280',
-                    ],
+                    backgroundColor: palette.slice(3, 9),
                     borderWidth: 0,
                 }]
             };
@@ -192,10 +204,10 @@ async function loadPage(page) {
                         {
                             label: 'Ingresos',
                             data: [0, 0, 0, 0, 5000, 100000],
-                            borderColor: '#00A63E',
-                            backgroundColor: 'rgba(0, 166, 62, 0.05)',
-                            pointBackgroundColor: '#ffffff',
-                            pointBorderColor: '#00A63E',
+                            borderColor: getColor('--color-4'),
+                            backgroundColor: `${getColor('--color-4')}0D`,
+                            borderColor: getColor('--color-1'),
+                            backgroundColor: `${getColor('--color-1')}0D`,
                             pointRadius: 5,
                             tension: 0.4,
                             fill: true,
@@ -254,6 +266,13 @@ async function loadPage(page) {
 // 🎯 EVENTOS GLOBALES
 // =========================
 document.addEventListener("click", (e) => {
+
+    // =========================
+    // 👤 ABRIR MODAL PERFIL
+    // =========================
+    if (e.target.closest(".profile-add")) {
+        document.getElementById("profile-modal")?.classList.remove("hidden");
+    }
 
     // =========================
     // 🔐 ABRIR MODAL LOGIN
@@ -318,6 +337,22 @@ document.addEventListener("click", (e) => {
         registerModal?.classList.add("hidden");
         loginModal?.classList.remove("hidden");
     }
+
+    // =========================
+    // 🔑 OLVIDÉ CONTRASEÑA
+    // =========================
+    if (e.target.closest("#btn-forgot-password")) {
+        loginModal?.classList.add("hidden");
+        document.getElementById("forgot-modal")?.classList.remove("hidden");
+    }
+
+    // =========================
+    // 🔙 VOLVER AL LOGIN DESDE RECUPERAR
+    // =========================
+    if (e.target.closest("#btn-back-to-login")) {
+        document.getElementById("forgot-modal")?.classList.add("hidden");
+        loginModal?.classList.remove("hidden");
+    }
     // =========================
     // ❌ CERRAR REGISTER (overlay)
     // =========================
@@ -330,6 +365,25 @@ document.addEventListener("click", (e) => {
     // =========================
     if (e.target.closest("#register-modal .modal-close")) {
         registerModal?.classList.add("hidden");
+    }
+
+    if (e.target.closest(".modal-overlay")) {
+        loginModal?.classList.add("hidden");
+        registerModal?.classList.add("hidden");
+        forgotModal?.classList.add("hidden"); // 👈
+    }
+
+    if (e.target.closest(".modal-close")) {
+        loginModal?.classList.add("hidden");
+        registerModal?.classList.add("hidden");
+        forgotModal?.classList.add("hidden"); // 👈
+    }
+
+    if (e.target.closest("#profile-modal .modal-overlay") ||
+        e.target.closest("#profile-modal .modal-close") ||
+        e.target.closest("#btn-cancel-profile")) {
+
+        document.getElementById("profile-modal")?.classList.add("hidden");
     }
 
     // =========================
@@ -394,6 +448,109 @@ document.addEventListener("click", (e) => {
 
     if (e.target.closest(".btn-cancel-savings")) {
         e.target.closest(".form-savings")?.classList.remove("active");
+    }
+
+    // =========================
+    // 👤 PERFIL
+    // =========================
+
+    // Abrir modal
+    if (e.target.closest(".profile-add")) {
+        document.getElementById("profile-modal")?.classList.remove("hidden");
+    }
+
+    // Cerrar modal
+    if (
+        e.target.closest("#profile-modal .modal-overlay") ||
+        e.target.closest("#profile-modal .modal-close") ||
+        e.target.closest("#btn-cancel-profile")
+    ) {
+        document.getElementById("profile-modal")?.classList.add("hidden");
+    }
+
+    // =========================
+    // 🎨 FUNCIÓN CAMBIAR COLOR GLOBAL
+    // =========================
+    const setPrimaryColor = (color) => {
+        document.documentElement.style.setProperty('--color-primary', color);
+    };
+
+    // =========================
+    // ➕ CREAR PERFIL
+    // =========================
+    if (e.target.closest("#btn-create-profile")) {
+
+        const input = document.getElementById("profile-name");
+        const name = input.value.trim();
+
+        if (!name) return;
+
+        const list = document.querySelector(".profiles-list");
+        if (!list) return;
+
+        const firstLetter = name.charAt(0).toUpperCase();
+
+        // 🎨 color aleatorio del sistema
+        const randomColor = palette[Math.floor(Math.random() * palette.length)];
+
+        const newProfile = document.createElement("div");
+        newProfile.classList.add("profile-item");
+
+        // ✅ CLAVE: asignar color al item
+        newProfile.style.setProperty('--profile-color', randomColor);
+
+        // guardar color en dataset
+        newProfile.dataset.color = randomColor;
+
+        newProfile.innerHTML = `
+            <div class="profile-avatar" style="background:${randomColor}">
+                ${firstLetter}
+            </div>
+            <span class="text text-main2 text-white">${name}</span>
+        `;
+
+        list.appendChild(newProfile);
+
+        input.value = "";
+
+        document.getElementById("profile-modal")?.classList.add("hidden");
+    }
+
+    if (e.target.closest(".profile-item")) {
+
+        const profile = e.target.closest(".profile-item");
+        const color = profile.dataset.color;
+
+        // 🔤 obtener nombre
+        const name = profile.querySelector("span")?.textContent || "Usuario";
+        const firstLetter = name.charAt(0).toUpperCase();
+
+        // 🎨 cambiar color global
+        if (color) {
+            setPrimaryColor(color);
+        }
+
+        // ✅ marcar activo
+        document.querySelectorAll(".profile-item")
+            .forEach(p => p.classList.remove("active"));
+
+        profile.classList.add("active");
+
+        // =========================
+        // 🧠 ACTUALIZAR HEADER
+        // =========================
+
+        const headerTitle = document.getElementById("header-title");
+        const headerAvatar = document.getElementById("header-avatar");
+
+        if (headerTitle) {
+            headerTitle.textContent = `Bienvenido, ${name}`;
+        }
+
+        if (headerAvatar) {
+            headerAvatar.textContent = firstLetter;
+            headerAvatar.style.background = color;
+        }
     }
 
 });
