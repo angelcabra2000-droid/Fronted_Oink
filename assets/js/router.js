@@ -4,10 +4,6 @@ const mainContent = document.getElementById('main-content');
 const landingNav = document.getElementById("landing-nav");
 const appNav = document.getElementById("app-nav");
 
-// Modal login
-const loginModal = document.getElementById("login-modal");
-const registerModal = document.getElementById("register-modal");
-const forgotModal = document.getElementById("forgot-modal");
 
 const setPrimaryColor = (color) => {
     document.documentElement.style.setProperty('--color-primary', color);
@@ -273,46 +269,7 @@ document.addEventListener("click", (e) => {
         document.getElementById("profile-modal")?.classList.remove("hidden");
     }
 
-    // =========================
-    // 🔐 ABRIR MODAL LOGIN
-    // =========================
-    if (e.target.closest("#btn-go-login")) {
-        loginModal?.classList.remove("hidden");
-    }
 
-    // =========================
-    // ❌ CERRAR MODAL (overlay)
-    // =========================
-    if (e.target.closest(".modal-overlay")) {
-        loginModal?.classList.add("hidden");
-    }
-
-    // =========================
-    // ❌ CERRAR MODAL (botón X)
-    // =========================
-    if (e.target.closest(".modal-close")) {
-        loginModal?.classList.add("hidden");
-    }
-
-    // =========================
-    // 🚀 LOGIN → ENTRAR APP
-    // =========================
-    if (e.target.closest("#btn-start")) {
-        loginModal?.classList.add("hidden"); // cerrar modal
-
-        loadPage("home");
-
-        navItems.forEach(n => n.classList.remove('active'));
-        document.querySelector('[data-page="home"]')?.classList.add('active');
-    }
-
-    // =========================
-    // 🟣 ABRIR REGISTRO
-    // =========================
-    if (e.target.closest("#btn-go-register")) {
-        loginModal?.classList.add("hidden");
-        registerModal?.classList.remove("hidden");
-    }
 
     // =========================
     // 🔐 VOLVER A LOGIN
@@ -322,68 +279,6 @@ document.addEventListener("click", (e) => {
         loginModal?.classList.remove("hidden");
     }
 
-    // =========================
-    // 🔄 LOGIN → REGISTER
-    // =========================
-    if (e.target.closest("#btn-go-register-from-login")) {
-        loginModal?.classList.add("hidden");
-        registerModal?.classList.remove("hidden");
-    }
-    // =========================
-    // 🔄 REGISTER → LOGIN
-    // =========================
-    if (e.target.closest("#btn-go-login-from-register")) {
-        registerModal?.classList.add("hidden");
-        loginModal?.classList.remove("hidden");
-    }
-
-    // =========================
-    // 🔑 OLVIDÉ CONTRASEÑA
-    // =========================
-    if (e.target.closest("#btn-forgot-password")) {
-        loginModal?.classList.add("hidden");
-        document.getElementById("forgot-modal")?.classList.remove("hidden");
-    }
-
-    // =========================
-    // 🔙 VOLVER AL LOGIN DESDE RECUPERAR
-    // =========================
-    if (e.target.closest("#btn-back-to-login")) {
-        document.getElementById("forgot-modal")?.classList.add("hidden");
-        loginModal?.classList.remove("hidden");
-    }
-    // =========================
-    // ❌ CERRAR REGISTER (overlay)
-    // =========================
-    if (e.target.closest("#register-modal .modal-overlay")) {
-        registerModal?.classList.add("hidden");
-    }
-
-    // =========================
-    // ❌ CERRAR REGISTER (X)
-    // =========================
-    if (e.target.closest("#register-modal .modal-close")) {
-        registerModal?.classList.add("hidden");
-    }
-
-    if (e.target.closest(".modal-overlay")) {
-        loginModal?.classList.add("hidden");
-        registerModal?.classList.add("hidden");
-        forgotModal?.classList.add("hidden"); // 👈
-    }
-
-    if (e.target.closest(".modal-close")) {
-        loginModal?.classList.add("hidden");
-        registerModal?.classList.add("hidden");
-        forgotModal?.classList.add("hidden"); // 👈
-    }
-
-    if (e.target.closest("#profile-modal .modal-overlay") ||
-        e.target.closest("#profile-modal .modal-close") ||
-        e.target.closest("#btn-cancel-profile")) {
-
-        document.getElementById("profile-modal")?.classList.add("hidden");
-    }
 
     // =========================
     // 🔴 LOGOUT
@@ -449,23 +344,6 @@ document.addEventListener("click", (e) => {
         e.target.closest(".form-savings")?.classList.remove("active");
     }
 
-    // =========================
-    // 👤 PERFIL
-    // =========================
-
-    // Abrir modal
-    if (e.target.closest(".profile-add")) {
-        document.getElementById("profile-modal")?.classList.remove("hidden");
-    }
-
-    // Cerrar modal
-    if (
-        e.target.closest("#profile-modal .modal-overlay") ||
-        e.target.closest("#profile-modal .modal-close") ||
-        e.target.closest("#btn-cancel-profile")
-    ) {
-        document.getElementById("profile-modal")?.classList.add("hidden");
-    }
 
     // =========================
     // 🎨 FUNCIÓN CAMBIAR COLOR GLOBAL
