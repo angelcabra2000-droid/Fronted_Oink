@@ -1,4 +1,3 @@
-const navItems = document.querySelectorAll('.nav-item');
 const mainContent = document.getElementById('main-content');
 
 // Sidebar modos
@@ -206,8 +205,8 @@ async function loadPage(page) {
                             data: [0, 0, 0, 0, 5000, 100000],
                             borderColor: getColor('--color-4'),
                             backgroundColor: `${getColor('--color-4')}0D`,
-                            borderColor: getColor('--color-1'),
-                            backgroundColor: `${getColor('--color-1')}0D`,
+                            pointBackgroundColor: '#ffffff',
+                            borderColor: getColor('--color-4'),
                             pointRadius: 5,
                             tension: 0.4,
                             fill: true,
@@ -215,10 +214,10 @@ async function loadPage(page) {
                         {
                             label: 'Gastos',
                             data: [0, 0, 0, 0, 2000, 50000],
-                            borderColor: '#E7000B',
-                            backgroundColor: 'rgba(231, 0, 11, 0.05)',
+                            borderColor: getColor('--color-1'),
+                            backgroundColor: `${getColor('--color-1')}0D`,
                             pointBackgroundColor: '#ffffff',
-                            pointBorderColor: '#E7000B',
+                            pointBorderColor: getColor('--color-1'),
                             pointRadius: 5,
                             tension: 0.4,
                             fill: true,
@@ -555,21 +554,6 @@ document.addEventListener("click", (e) => {
 
 });
 
-
-// =========================
-// 🧭 NAVEGACIÓN NORMAL
-// =========================
-navItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        navItems.forEach(n => n.classList.remove('active'));
-        item.classList.add('active');
-
-        const page = item.dataset.page;
-        loadPage(page);
-    });
-});
 
 
 // =========================
