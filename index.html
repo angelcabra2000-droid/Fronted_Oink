@@ -134,7 +134,8 @@
                     <div class="field">
                         <span class="text text-secondary">Contraseña</span>
                         <input class="input" placeholder="Contraseña">
-                        <span class="text text-secondary text-light">¿Olvidaste tu contraseña?</span>
+                        <span class="text text-secondary text-light link-text" id="btn-forgot-password">¿Olvidaste tu
+                            contraseña?</span>
                     </div>
 
 
@@ -145,11 +146,34 @@
                             Registrarse
                         </button>
                     </div>
-
-
-
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div id="forgot-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+            <h2 class="title-main">Recuperar Contraseña</h2>
+
+            <div class="form form-balance">
+                <div class="fields-login">
+                    <p class="text text-secondary">Ingresa tu correo y te enviaremos un enlace para restablecer tu
+                        contraseña.</p>
+
+                    <div class="field">
+                        <span class="text text-secondary">Correo</span>
+                        <input class="input" placeholder="Correo">
+                    </div>
+
+                    <button class="btn btn-balance">Enviar enlace</button>
+
+                    <div class="field">
+                        <button id="btn-back-to-login" class="btn btn-base">Volver al inicio de sesión</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

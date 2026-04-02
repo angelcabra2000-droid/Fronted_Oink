@@ -8,6 +8,7 @@ const appNav = document.getElementById("app-nav");
 // Modal login
 const loginModal = document.getElementById("login-modal");
 const registerModal = document.getElementById("register-modal");
+const forgotModal = document.getElementById("forgot-modal");
 
 // =========================
 // 📦 CARGA DE PÁGINAS
@@ -318,6 +319,22 @@ document.addEventListener("click", (e) => {
         registerModal?.classList.add("hidden");
         loginModal?.classList.remove("hidden");
     }
+
+    // =========================
+    // 🔑 OLVIDÉ CONTRASEÑA
+    // =========================
+    if (e.target.closest("#btn-forgot-password")) {
+        loginModal?.classList.add("hidden");
+        document.getElementById("forgot-modal")?.classList.remove("hidden");
+    }
+
+    // =========================
+    // 🔙 VOLVER AL LOGIN DESDE RECUPERAR
+    // =========================
+    if (e.target.closest("#btn-back-to-login")) {
+        document.getElementById("forgot-modal")?.classList.add("hidden");
+        loginModal?.classList.remove("hidden");
+    }
     // =========================
     // ❌ CERRAR REGISTER (overlay)
     // =========================
@@ -330,6 +347,18 @@ document.addEventListener("click", (e) => {
     // =========================
     if (e.target.closest("#register-modal .modal-close")) {
         registerModal?.classList.add("hidden");
+    }
+
+    if (e.target.closest(".modal-overlay")) {
+        loginModal?.classList.add("hidden");
+        registerModal?.classList.add("hidden");
+        forgotModal?.classList.add("hidden"); // 👈
+    }
+
+    if (e.target.closest(".modal-close")) {
+        loginModal?.classList.add("hidden");
+        registerModal?.classList.add("hidden");
+        forgotModal?.classList.add("hidden"); // 👈
     }
 
     // =========================
