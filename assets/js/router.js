@@ -516,23 +516,41 @@ document.addEventListener("click", (e) => {
         document.getElementById("profile-modal")?.classList.add("hidden");
     }
 
-    // =========================
-    // 🔄 CAMBIAR PERFIL (COLOR GLOBAL)
-    // =========================
     if (e.target.closest(".profile-item")) {
 
         const profile = e.target.closest(".profile-item");
         const color = profile.dataset.color;
 
+        // 🔤 obtener nombre
+        const name = profile.querySelector("span")?.textContent || "Usuario";
+        const firstLetter = name.charAt(0).toUpperCase();
+
+        // 🎨 cambiar color global
         if (color) {
             setPrimaryColor(color);
         }
 
-        // UI activo
+        // ✅ marcar activo
         document.querySelectorAll(".profile-item")
             .forEach(p => p.classList.remove("active"));
 
         profile.classList.add("active");
+
+        // =========================
+        // 🧠 ACTUALIZAR HEADER
+        // =========================
+
+        const headerTitle = document.getElementById("header-title");
+        const headerAvatar = document.getElementById("header-avatar");
+
+        if (headerTitle) {
+            headerTitle.textContent = `Bienvenido, ${name}`;
+        }
+
+        if (headerAvatar) {
+            headerAvatar.textContent = firstLetter;
+            headerAvatar.style.background = color;
+        }
     }
 
 });
