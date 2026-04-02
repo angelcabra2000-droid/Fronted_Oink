@@ -67,8 +67,6 @@ document.addEventListener("click", (e) => {
         document.getElementById("profile-modal")?.classList.remove("hidden");
     }
 
-
-
     // =========================
     // 🔐 VOLVER A LOGIN
     // =========================
@@ -77,18 +75,12 @@ document.addEventListener("click", (e) => {
         loginModal?.classList.remove("hidden");
     }
 
-
     // =========================
     // 🔴 LOGOUT
     // =========================
     if (e.target.closest("#btn-logout")) {
 
-        // volver a landing
         loadPage("landing");
-
-        // mostrar nav de landing
-        if (landingNav) landingNav.style.display = "flex";
-        if (appNav) appNav.style.display = "none";
 
         // limpiar selección
         navItems.forEach(n => n.classList.remove('active'));
