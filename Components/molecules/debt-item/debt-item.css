@@ -24,3 +24,24 @@
     flex-direction: column;
     gap: var(--space-xs);
 }
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+
+@media (max-width: 768px) {
+   .debt-item-stats {
+      flex-direction: column;
+      gap: var(--space-sm);
+   }
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+
+@media (max-width: 360px) {
+   .debt-item {
+      padding: 10px;
+   }
+}

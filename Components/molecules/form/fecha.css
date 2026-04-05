@@ -88,3 +88,25 @@
 .flatpickr-input {
     padding: 8px 12px;
 }
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+
+@media (max-width: 768px) {
+   .flatpickr-calendar {
+      width: 100%;
+      max-width: 300px;
+   }
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+
+@media (max-width: 360px) {
+   .flatpickr-calendar {
+      transform: scale(0.9);
+      transform-origin: top center;
+   }
+}
