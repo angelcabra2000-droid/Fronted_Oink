@@ -27,3 +27,31 @@
     flex-direction: column;
 
 }
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+@media (max-width: 768px) {
+
+   .header {
+      height: 65px;
+      padding: 0 10px;
+   }
+
+   .brand {
+      gap: 10px;
+   }
+}
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+@media (max-width: 360px) {
+
+   .header {
+      height: 60px;
+   }
+
+   .brand-text {
+      display: none;
+   }
+
+}

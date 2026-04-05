@@ -50,3 +50,30 @@
 .chart-bar-item.bg-savings {
     background: var(--color-savings);
 }
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+@media (max-width: 768px) {
+
+   .chart-bars {
+      overflow-x: auto;
+   }
+
+   .chart-bar-item {
+      min-width: 50px;
+   }
+
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+@media (max-width: 360px) {
+
+   .chart-bar-item {
+      min-width: 40px;
+      height: 60px;
+   }
+
+}
