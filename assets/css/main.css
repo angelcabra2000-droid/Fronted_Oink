@@ -157,11 +157,35 @@ body {
    
    }
 }
+.menu-toggle {
+   display: none;
+}
 
 /* =========================
    RESPONSIVE MOBILE GRANDE
 ========================= */
-@media (max-width: 768px) {
+   @media (max-width: 768px) {
+
+      body.logged-in .menu-toggle {
+      display: block;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+   }
+
+
+#landing-nav {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background: var(--color-background);
+      z-index: 998;
+   }
 
    body {
       padding: 0 10px 20px 10px;
@@ -171,48 +195,24 @@ body {
       flex-direction: column;
    }
 
-   .sidebar {
-      position: relative;
-      width: 100%;
-      left: 0;
-      top: 0;
-      bottom: auto;
-   }
+.sidebar {
+   position: fixed;
+   top: 70px;
+   left: -100%;
+   width: 260px;
+   height: calc(100% - 70px);
+   background: var(--color-background);
+   transition: left 0.3s ease;
+   z-index: 999;
+}
+
+.sidebar.active {
+   left: 0;
+}
 
    .content {
       margin-left: 0;
       width: 100%;
       padding: 16px;
-   }
-}
-
-/* =========================
-   RESPONSIVE MOBILE PEQUEÑO
-========================= */
-@media (max-width: 360px) {
-
-   body {
-      padding: 0 8px 20px 8px;
-   }
-
-
-
-   .sidebar {
-      position: relative;
-      width: 100%;
-      left: 0;
-      top: 0;
-      bottom: auto;
-      padding: 10px;
-   }
-
-   .content {
-      margin-left: 0;
-      width: 100%;
-      padding: 10px;
-   }
-
-   .content-inner {
-      gap: 15px;
    }
 }

@@ -62,15 +62,18 @@ document.addEventListener("click", (e) => {
     }
 
     // 🚀 LOGIN → ENTRAR APP
-    if (e.target.closest("#btn-start")) {
-        loginModal?.classList.add("hidden");
+if (e.target.closest("#btn-start")) {
+    loginModal?.classList.add("hidden");
 
-        loadPage("home");
+    // 🔥 ESTA LÍNEA ES LA CLAVE
+    document.body.classList.add("logged-in");
 
-        document.querySelectorAll('.nav-item')
-            .forEach(n => n.classList.remove('active'));
+    loadPage("home");
 
-        document.querySelector('[data-page="home"]')
-            ?.classList.add('active');
-    }
+    document.querySelectorAll('.nav-item')
+        .forEach(n => n.classList.remove('active'));
+
+    document.querySelector('[data-page="home"]')
+        ?.classList.add('active');
+}
 });
