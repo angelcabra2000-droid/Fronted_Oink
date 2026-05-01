@@ -50,4 +50,15 @@ document.addEventListener('click', (e) => {
         sidebar.classList.remove('active');
         sidebarOverlay.classList.remove('active');
     }
+
+    if (
+        e.target.closest('#btn-start') ||
+        e.target.closest('#btn-logout') ||
+        e.target.closest('#btn-go-login') ||
+        e.target.closest('#btn-go-register') ||
+        e.target.closest('#btn-go-register-from-login')
+    ) {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+    }
 });

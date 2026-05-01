@@ -16,6 +16,7 @@
 @import url("../../Components/atoms/input/input.css");
 @import url("../../Components/atoms/typography/typography.css");
 @import url("../../Components/atoms/Icon_User/Icon_User.css");
+
 /* =========================
    MOLECULES
 ========================= */
@@ -63,12 +64,18 @@
    padding: 0;
 }
 
+img {
+   max-width: 100%;
+   height: auto;
+   display: block;
+}
+
 body {
    font-family: var(--font-primary);
    background: var(--color-background);
    color: var(--color-text);
    min-height: 100vh;
-   padding: 0 100px 50px 100px;
+   padding: 0 100px 50px;
 }
 
 /* =========================
@@ -79,7 +86,7 @@ body {
    top: 0;
    left: 0;
    right: 0;
-   z-index: 100;
+   z-index: 1100;
 
    height: 70px;
 
@@ -93,37 +100,94 @@ body {
    border-bottom: 1px solid var(--color-border);
 }
 
+/* =========================
+   MENU HAMBURGUESA
+========================= */
+.menu-toggle {
+   display: none;
+   align-items: center;
+   justify-content: center;
+
+   background: none;
+   border: none;
+   padding: 8px;
+   cursor: pointer;
+}
+
+.menu-icon {
+   width: 28px;
+   height: 28px;
+   display: block;
+}
+
+.menu-toggle:hover {
+   opacity: 0.8;
+}
+
+.menu-toggle:active {
+   transform: scale(0.95);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
 .sidebar {
    position: fixed;
    top: 70px;
-   /* 👈 margen top + altura header */
    left: 100px;
-   /* 👈 antes era 0 */
    bottom: 50px;
-   /* 👈 antes era 0 */
    width: 260px;
 
-   overflow-y: auto;
    display: flex;
    flex-direction: column;
    gap: var(--space-sm);
-   padding: var(--space-md);
-   background: var(--color-background);
 
+   padding: var(--space-md);
+   overflow-y: auto;
+
+   background: var(--color-background);
+}
+
+/* =========================
+   SIDEBAR OVERLAY
+========================= */
+.sidebar-overlay {
+   position: fixed;
+   top: 65px;
+   left: 0;
+   right: 0;
+   bottom: 0;
+
+   z-index: 999;
+
+   background: rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(3px);
+
+   opacity: 0;
+   visibility: hidden;
+   pointer-events: none;
+
+   transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.active {
+   opacity: 1;
+   visibility: visible;
+   pointer-events: auto;
 }
 
 .page-wrapper {
-   padding-top: 70px;
    display: flex;
    min-height: 100vh;
+   padding-top: 70px;
 }
 
 /* =========================
    CONTENT
 ========================= */
 .content {
-   margin-left: 260px;
    flex: 1;
+   margin-left: 260px;
    padding: var(--space-lg);
 
    display: flex;
@@ -141,7 +205,7 @@ body {
 }
 
 /* =========================
-   RESPONSIVE TABLET
+   RESPONSIVE - TABLET / MOBILE
 ========================= */
 @media (max-width: 768px) {
    body {
@@ -149,18 +213,13 @@ body {
    }
 
    .page-wrapper {
-      padding-top: 65px;
       flex-direction: column;
       min-height: 100vh;
+      padding-top: 65px;
    }
 
-   body.logged-in .menu-toggle {
-      display: block;
-      font-size: 24px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--color-text);
+   .menu-toggle {
+      display: flex !important;
    }
 
    .sidebar {
@@ -168,21 +227,20 @@ body {
       top: 65px;
       left: -280px;
       width: 280px;
-      height: calc(100vh - 65px);
-      padding: 16px;
-      background: var(--color-background);
+      height: calc(100dvh - 65px);
+      overflow-y: auto;
       transition: left 0.3s ease;
       z-index: 1000;
-      overflow-y: auto;
    }
+
 
    .sidebar.active {
       left: 0;
    }
 
    .content {
-      margin-left: 0;
       width: 100%;
+      margin-left: 0;
       padding: 16px;
    }
 
@@ -191,18 +249,24 @@ body {
    }
 
    #landing-nav {
+      position: static;
+      z-index: auto;
+
       display: flex;
       flex-direction: column;
       width: 100%;
       padding: 0;
+
       background: transparent;
-      position: static;
-      z-index: auto;
    }
 }
 
-img {
-   max-width: 100%;
-   height: auto;
-   display: block;
+@media (min-width: 769px) {
+   .menu-toggle {
+      display: none !important;
+   }
+
+   .sidebar-overlay {
+      display: none;
+   }
 }

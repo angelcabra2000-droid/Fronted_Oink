@@ -1,37 +1,33 @@
 .landing-nav {
     display: flex;
     flex-direction: column;
-
-    padding: 12px;
-
-    width: 100%;
-
-    height: fit-content;
-
-    background: white;
-
-    border-radius: 10px;
-
     gap: 8px;
 
+    width: 100%;
+    height: fit-content;
+    padding: 12px;
+
+    background: white;
+    border-radius: 10px;
 }
 
 .hidden {
     display: none !important;
 }
 
-/* contenedor general */
+/* =========================
+   MODALES
+========================= */
 .modal {
     position: fixed;
     inset: 0;
     z-index: 999;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
-/* fondo oscuro + blur */
 .modal-overlay {
     position: absolute;
     inset: 0;
@@ -40,64 +36,41 @@
     backdrop-filter: blur(3px);
 }
 
-/* contenido */
 .modal-content {
     position: relative;
     z-index: 1;
 
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-
     width: 100%;
     max-width: 420px;
+    padding: 30px;
 
+    background: white;
+    border-radius: 16px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
+/* =========================
+   LOGOUT
+========================= */
 .logout-container {
     margin-top: auto;
+    padding: 12px;
     padding-top: 20px;
 
     display: flex;
     flex-direction: column;
 
-    padding: 12px;
-
     width: 100%;
-
     height: fit-content;
 
     background: white;
-
     border-radius: 10px;
 }
 
-.sidebar-overlay {
-    position: fixed;
-    top: 65px;
-    left: 0;
-    right: 0;
-    bottom: 0;
 
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3px);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-
-    z-index: 999;
-}
-
-.sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
+/* =========================
+   RESPONSIVE MODALS
+========================= */
 @media (max-width: 768px) {
     .modal {
         padding: 16px;
@@ -106,22 +79,16 @@
     .modal-content {
         width: 100%;
         max-width: none;
-        padding: 24px 20px;
-        border-radius: 14px;
         max-height: 90vh;
         overflow-y: auto;
-    }
 
+        padding: 24px 20px;
+        border-radius: 14px;
+    }
 }
 
 @media (max-width: 480px) {
     .modal-content {
         padding: 20px 16px;
-    }
-}
-
-@media (min-width: 769px) {
-    .sidebar-overlay {
-        display: none;
     }
 }
