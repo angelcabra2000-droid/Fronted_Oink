@@ -6,3 +6,9 @@
 .charts-row .chart-summary-card {
     flex: 1;
 }
+
+@media (max-width: 768px) {
+    .charts-row {
+        flex-direction: column;
+    }
+}

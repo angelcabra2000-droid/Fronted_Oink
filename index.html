@@ -40,24 +40,19 @@
         <aside class="sidebar">
 
             <!-- 🟢 LANDING NAV -->
-            <section class="profiles-panel">
+            <div id="landing-nav">
+                <section class="profiles-panel">
+                    <button class="btn btn-balance" id="btn-go-login">Iniciar Sesion</button>
+                    <button id="btn-go-register-from-login" class="btn btn-base btn-register">Registrarse</button>
+                </section>
 
-                <div id="landing-nav" class="landing-nav">
-                    <button class="btn  btn-balance" id="btn-go-login">Iniciar Sesion</button>
-                    <button id="btn-go-register-from-login" class="btn btn-base btn-register">
-                        Registrarse
-                    </button>
-                </div>
-            </section>
+            </div>
 
             <!-- 🔵 APP -->
             <div id="app-nav">
-
                 <section class="profiles-panel">
                     <h2 class="subtitle">Perfiles</h2>
-                    <div class="profiles-list">
-
-                    </div>
+                    <div class="profiles-list"></div>
                     <div class="profile-add">
                         <img src="assets/icons/user-plus.svg" class="icon">
                         <span class="text text-secondary">Agregar perfil</span>
@@ -82,16 +77,15 @@
                         <span class="text text-main">Deudas</span>
                     </a>
                     <a class="nav-item" href="#" data-page="ahorro">
-                        <img src="assets/icons/saving.svg" class="icon ">
+                        <img src="assets/icons/saving.svg" class="icon">
                         <span class="text text-main">Ahorro</span>
                     </a>
                     <a class="nav-item" href="#" data-page="analisis">
-                        <img src="assets/icons/analisis.svg" class="icon  ">
+                        <img src="assets/icons/analisis.svg" class="icon">
                         <span class="text text-main">Analisis</span>
                     </a>
                 </nav>
 
-                <!-- 🔴 BOTÓN CERRAR SESIÓN -->
                 <div class="logout-container">
                     <button id="btn-logout" class="btn btn-balance">
                         Cerrar Sesión
@@ -99,8 +93,9 @@
                 </div>
             </div>
 
-
         </aside>
+
+
         <div class="sidebar-overlay"></div>
 
         <!-- CONTENIDO PRINCIPAL -->
