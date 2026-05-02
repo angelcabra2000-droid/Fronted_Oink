@@ -123,3 +123,38 @@
 .link-text:hover {
     color: var(--color-balance);
 }
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .title-main {
+        font-size: 18px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .text-main {
+        font-size: 13px;
+    }
+
+    .text-main2 {
+        font-size: 13px;
+    }
+
+    .text-secondary {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-main {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+}
