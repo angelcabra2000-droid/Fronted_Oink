@@ -7,3 +7,9 @@
 .analysis-row .financial-state-card {
     flex: 1;
 }
+
+@media (max-width: 768px) {
+    .analysis-row {
+        flex-direction: column;
+    }
+}
