@@ -1,0 +1,99 @@
+/* CONTENEDOR */
+.icon-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+/* BASE COMPARTIDA */
+.icon-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+}
+
+/* COLORES */
+.icon-bg-income {
+    background: var(--color-income-claro);
+}
+
+.icon-bg-balance {
+    background: var(--color-balance-claro);
+}
+
+.icon-bg-expense {
+    background: var(--color-expense-claro);
+}
+
+.icon-bg-debt {
+    background: var(--color-debt-claro);
+}
+
+.icon-bg-savings {
+    background: var(--color-savings-claro);
+}
+
+
+.icon-income-solid {
+    background: var(--color-income);
+}
+
+.icon-balance-solid {
+    background: var(--color-balance);
+}
+
+.icon-expense-solid {
+    background: var(--color-expense);
+}
+
+.icon-debt-solid {
+    background: var(--color-debt);
+}
+
+.icon-savings-solid {
+    background: var(--color-savings);
+}
+
+/* ICONO ENCIMA */
+.icon-container .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    height: 22px;
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+@media (max-width: 768px) {
+
+   .icon-container {
+      width: 40px;
+      height: 40px;
+   }
+
+   .icon-container .icon {
+      width: 18px;
+      height: 18px;
+   }
+
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+@media (max-width: 360px) {
+
+   .icon-container {
+      width: 35px;
+      height: 35px;
+   }
+
+   .icon-container .icon {
+      width: 16px;
+      height: 16px;
+   }
+
+}

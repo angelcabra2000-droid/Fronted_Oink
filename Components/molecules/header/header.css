@@ -1,0 +1,68 @@
+.header {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 1100;
+
+   width: 100%;
+   max-width: 100%;
+   overflow: hidden;
+   box-sizing: border-box;
+
+   height: 70px;
+   padding: 0 16px;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   background: var(--color-white);
+   border-bottom: 1px solid var(--color-border);
+}
+
+.brand {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+
+   flex: 1;
+   min-width: 0;
+}
+
+.brand-text {
+   display: flex;
+   flex-direction: column;
+   min-width: 0;
+   overflow: hidden;
+}
+
+.title-main,
+.title-secondary {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+@media (max-width: 768px) {
+   .header {
+      height: 65px;
+      padding: 0 12px;
+      justify-content: space-between;
+   }
+
+   .brand {
+      flex: 1;
+      gap: 10px;
+   }
+
+   .menu-toggle {
+      display: flex !important;
+      order: 2;
+      margin-left: auto;
+      flex-shrink: 0;
+   }
+}

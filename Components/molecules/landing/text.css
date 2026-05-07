@@ -1,0 +1,18 @@
+.content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-sm);
+}
+
+.plans-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    gap: var(--space-sm);
+
+    margin-bottom: 32px;
+}

@@ -1,0 +1,23 @@
+.profiles-panel {
+
+
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+
+    margin-bottom: 20px;
+}
+
+
+
+.profiles-list {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+}

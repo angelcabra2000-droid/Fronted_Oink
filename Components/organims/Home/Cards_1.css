@@ -1,0 +1,30 @@
+.stats-row {
+    display: flex;
+    gap: 10px;
+}
+
+.stats-row .stat-card {
+    flex: 1;
+}
+
+.stats-row .register-card {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-row-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stats-row-col {
+        display: flex;
+        /* 👈 sobreescribe el grid */
+        flex-direction: column;
+        /* 👈 apila hacia abajo */
+    }
+}

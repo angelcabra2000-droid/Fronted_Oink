@@ -1,0 +1,58 @@
+.icon {
+    width: 20px;
+    height: 20px;
+
+    display: inline-flex;
+}
+
+.icon-balance {
+    filter: var(--filter-balance);
+}
+
+.icon-income {
+    filter: var(--filter-income);
+}
+
+.icon-expense {
+    filter: var(--filter-expense);
+}
+
+.icon-debt {
+    filter: var(--filter-debt);
+}
+
+.icon-savings {
+    filter: var(--filter-savings);
+}
+
+
+/* TAMAÑOS */
+.icon-sm {
+    width: 16px;
+    height: 16px;
+}
+
+.icon-md {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-lg {
+    width: 26px;
+    height: 26px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: background var(--transition-fast) ease;
+}
+
+.icon-btn:hover {
+    background: rgba(74, 85, 101, 0.1);
+}

@@ -1,0 +1,160 @@
+/* =========================
+   TITULOS
+========================= */
+
+.title {
+
+    font-family: var(--font-primary);
+    font-weight: 600;
+
+    color: var(--color-title);
+
+}
+
+.title-main {
+
+    font-size: 20px;
+
+}
+
+.subtitle {
+
+    font-family: var(--font-primary);
+    font-weight: 600;
+
+    font-size: 15px;
+
+    color: var(--color-title);
+
+}
+
+
+/* =========================
+   TEXTOS
+========================= */
+
+.text {
+
+    font-family: var(--font-primary);
+    font-weight: 400;
+
+    color: var(--color-text);
+
+}
+
+.text-main {
+
+    font-size: 14px;
+
+}
+
+.text-main2 {
+
+    font-size: 14px;
+
+}
+
+.text-secondary {
+
+    font-size: 12px;
+
+}
+
+/* =========================
+   COLORES DE TEXTO
+========================= */
+.text-balance {
+    color: var(--color-balance);
+}
+
+.text-income {
+    color: var(--color-income);
+}
+
+.text-expense {
+    color: var(--color-expense);
+}
+
+.text-debt {
+    color: var(--color-debt);
+}
+
+.text-savings {
+    color: var(--color-savings);
+}
+
+.text-light {
+    color: var(--color-text-light);
+
+}
+
+.text-white {
+    color: white;
+}
+
+/* =========================
+   COLORES DE TITULO
+========================= */
+.title-balance {
+    color: var(--color-balance);
+}
+
+.title-income {
+    color: var(--color-income);
+}
+
+.title-expense {
+    color: var(--color-expense);
+}
+
+.title-debt {
+    color: var(--color-debt);
+}
+
+.title-savings {
+    color: var(--color-savings);
+}
+
+.link-text {
+    cursor: pointer;
+    transition: color var(--transition-fast) ease;
+}
+
+.link-text:hover {
+    color: var(--color-balance);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .title-main {
+        font-size: 18px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .text-main {
+        font-size: 13px;
+    }
+
+    .text-main2 {
+        font-size: 13px;
+    }
+
+    .text-secondary {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-main {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+}

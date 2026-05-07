@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Finance App</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="icon" type="image/png" sizes="40x40" href="assets/Img/Oink_1.png">
+    <!-- LIBRERIAS -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <img src="assets/icons/bars.svg" alt="Menú" class="menu-icon">
+        </button>
+        <div class="brand">
+            <img src="assets/Img/Oink_1.png" class="logo">
+            <div class="brand-text">
+                <span class="title title-main">Oink</span>
+                <span class="text text-secondary">Tu aliado financiero</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- WRAPPER: sidebar + contenido -->
+    <div class="page-wrapper">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- 🟢 LANDING NAV -->
+            <div id="landing-nav">
+                <section class="profiles-panel">
+                    <button class="btn btn-balance" id="btn-go-login">Iniciar Sesion</button>
+                    <button id="btn-go-register-from-login" class="btn btn-base btn-register">Registrarse</button>
+                </section>
+
+            </div>
+
+            <!-- 🔵 APP -->
+            <div id="app-nav">
+                <section class="profiles-panel">
+                    <h2 class="subtitle">Perfiles</h2>
+                    <div class="profiles-list"></div>
+                    <div class="profile-add">
+                        <img src="assets/icons/user-plus.svg" class="icon">
+                        <span class="text text-secondary" id="btn-add-profiles">Agregar perfil</span>
+                    </div>
+                </section>
+
+                <nav class="navigation">
+                    <a class="nav-item active" href="#" data-page="home">
+                        <img src="assets/icons/home.svg" class="icon">
+                        <span class="text text-main">Inicio</span>
+                    </a>
+                    <a class="nav-item" href="#" data-page="ingresos">
+                        <img src="assets/icons/increase.svg" class="icon">
+                        <span class="text text-main">Ingresos</span>
+                    </a>
+                    <a class="nav-item" href="#" data-page="gastos">
+                        <img src="assets/icons/degrowth.svg" class="icon">
+                        <span class="text text-main">Gastos</span>
+                    </a>
+                    <a class="nav-item" href="#" data-page="deudas">
+                        <img src="assets/icons/credit-card.svg" class="icon">
+                        <span class="text text-main">Deudas</span>
+                    </a>
+                    <a class="nav-item" href="#" data-page="ahorro">
+                        <img src="assets/icons/saving.svg" class="icon">
+                        <span class="text text-main">Ahorro</span>
+                    </a>
+                    <a class="nav-item" href="#" data-page="analisis">
+                        <img src="assets/icons/analisis.svg" class="icon">
+                        <span class="text text-main">Analisis</span>
+                    </a>
+                </nav>
+
+                <div class="logout-container">
+                    <button id="btn-logout" class="btn btn-balance">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <div class="sidebar-overlay"></div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+
+        <main class="content" id="main-content">
+
+            <!-- Aquí va el contenido de cada página -->
+        </main>
+
+    </div>
+
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+            <h2 class="title-main">Inicio de Sesion</h2>
+
+
+            <div class="form form-balance">
+
+                <div class="fields-login">
+                    <div class="field">
+                        <span class="text text-secondary">Correo</span>
+                        <input class="input" placeholder="Correo">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Contraseña</span>
+                        <input class="input" placeholder="Contraseña">
+                        <span class="text text-secondary text-light link-text" id="btn-forgot-password">¿Olvidaste tu
+                            contraseña?</span>
+                    </div>
+
+
+                    <button class="btn  btn-balance" id="btn-start">Iniciar Sesion</button>
+                    <div class="field">
+                        <span class="text text-secondary  text-light">¿No tienes una cuenta?</span>
+                        <button id="btn-go-register-from-login" class="btn btn-base">Registrarse</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="forgot-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+            <h2 class="title-main">Recuperar Contraseña</h2>
+
+            <div class="form form-balance">
+                <div class="fields-login">
+                    <p class="text text-secondary">Ingresa tu correo y te enviaremos un enlace para restablecer tu
+                        contraseña.</p>
+
+                    <div class="field">
+                        <span class="text text-secondary">Correo</span>
+                        <input class="input" placeholder="Correo">
+                    </div>
+
+                    <button class="btn btn-balance">Enviar enlace</button>
+
+                    <div class="field">
+                        <button id="btn-back-to-login" class="btn btn-base">Volver al inicio de sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">Registrarse</h2>
+
+            <div class="form form-balance">
+                <div class="fields-login">
+
+                    <div class="field">
+                        <span class="text text-secondary">Nombre</span>
+                        <input id="register-name" class="input" placeholder="Nombre">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Apellidos</span>
+                        <input id="register-lastname" class="input" placeholder="Apellidos">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Apodo</span>
+                        <input id="register-username" class="input" placeholder="Apodo">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Correo</span>
+                        <input id="register-email" class="input" placeholder="Correo" type="email">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Contraseña</span>
+                        <input id="register-password" class="input" type="password" placeholder="Contraseña">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Escribe de nuevo la contraseña</span>
+                        <input id="register-password-confirm" class="input" type="password" placeholder="Contraseña">
+                    </div>
+
+
+                </div>
+
+                <button id="btn-open-payment" class="btn btn-balance">Continuar </button>
+                <div class="field">
+                    <span class="text text-secondary  text-light">¿Ya tienes una cuenta?</span>
+                    <button class="btn btn-base" id=btn-go-login-from-register>Iniciar Sesion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">Crear perfil</h2>
+
+            <div class="form form-balance">
+                <div class="fields-login">
+
+                    <div class="field">
+                        <span class="text text-secondary">Nombre del perfil</span>
+                        <input id="profile-name" class="input" placeholder="Ej: Juan">
+                    </div>
+
+                    <div class="field">
+                        <button id="btn-create-profile" class="btn btn-base">Crear perfil</button>
+                        <button id="btn-cancel-profile" class="btn btn-balance">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="plans-modal" class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <div class="plans-content">
+                <h2 class="title title-main">Elige tu plan Perfecto</h2>
+                <p class="text text-main text-light">Empieza hoy y transforma la forma en la que manejas tu dinero </p>
+            </div>
+
+            <div class="plans-grid">
+
+                <!-- PLAN MENSUAL -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <span class="text text-secondary">Plan Mensual</span>
+                        <div class="pricing-price">
+                            <span class="title title-main">$9.99</span>
+                            <span class="text text-secondary text-light">/mes</span>
+                        </div>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Gestión ilimitada de perfiles</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Control de ingresos y gastos</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Seguimiento de deudas</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Análisis financieros básicos</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Soporte por email</span>
+                        </li>
+                    </ul>
+
+                    <button id="btn-open-register" class="btn btn-base btn-register">Comenzar Ahora</button>
+
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <span class="text text-secondary">Plan Semestral</span>
+                        <div class="pricing-price">
+                            <span class="title title-main">$7.99</span>
+                            <span class="text text-secondary text-light">/mes</span>
+                        </div>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Todo del plan mensual</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Reportes avanzados</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Gráficos interactivos</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Categorías personalizadas</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Soporte prioritario</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                            <span class="text text-main text-light">Exportación de datos</span>
+                        </li>
+                    </ul>
+
+                    <button id="btn-open-register" class="btn btn-base btn-register"">Comenzar Ahora</button>
+        </div>
+
+        <div class=" pricing-card">
+                        <div class="pricing-header">
+                            <span class="text text-secondary">Plan Anual</span>
+                            <div class="pricing-price">
+                                <span class="title title-main">$5.99</span>
+                                <span class="text text-secondary text-light">/mes</span>
+                            </div>
+                        </div>
+
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">
+                                <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                                <span class="text text-main text-light">Todo del plan semestral</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                                <span class="text text-main text-light">Múltiples familias</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                                <span class="text text-main text-light">Presupuestos avanzados</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                                <span class="text text-main text-light">Notificaciones personalizadas</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                                <span class="text text-main text-light">Soporte 24/7</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <img src="assets/icons/check.svg" class="icon icon-sm icon-income">
+                                <span class="text text-main text-light">Acceso anticipado a nuevas funciones</span>
+                            </li>
+                        </ul>
+
+                        <button id="btn-open-register" class="btn btn-base btn-register">Comenzar Ahora</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="payment-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">Finalizar Compra</h2>
+
+            <div class="form form-balance">
+
+                <div class="fields-login">
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Nombre del titular
+                        </span>
+
+                        <input class="input" placeholder="Ej: Juan Pérez">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Número de tarjeta
+                        </span>
+
+                        <input class="input" placeholder="1234 5678 9012 3456">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Fecha de expiración
+                        </span>
+
+                        <input class="input" placeholder="MM/AA">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Código CVV
+                        </span>
+
+                        <input class="input" placeholder="123">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Dirección de facturación
+                        </span>
+
+                        <input class="input" placeholder="Dirección">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Valor del plan
+                        </span>
+
+                        <input class="input" value="$9.99 / mes" disabled>
+                    </div>
+
+                </div>
+
+                <button id="btn-finish-payment" class="btn btn-balance">
+                    Pagar Ahora
+                </button>
+
+                <div class="field">
+                    <button id="btn-back-register" class="btn btn-base">
+                        Volver
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="assets/js/router.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/modals.js"></script>
+    <script src="assets/js/profiles.js"></script>
+    <script src="assets/js/charts.js"></script>
+
+</body>
+
+</html>

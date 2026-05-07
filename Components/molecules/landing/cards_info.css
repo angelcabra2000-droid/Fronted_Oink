@@ -1,0 +1,120 @@
+/* =========================
+   FEATURE CARD
+========================= */
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+
+    padding: 24px;
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+/* =========================
+   CARD COLORS
+========================= */
+.feature-card-balance {
+    background: var(--color-balance-claro);
+}
+
+.feature-card-income {
+    background: var(--color-income-claro);
+}
+
+.feature-card-expense {
+    background: var(--color-expense-claro);
+}
+
+.feature-card-debt {
+    background: var(--color-debt-claro);
+}
+
+.feature-card-savings {
+    background: var(--color-savings-claro);
+}
+
+/* =========================
+   FEATURE ICON
+========================= */
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.icon-white {
+    filter: brightness(0) invert(1);
+}
+
+/* =========================
+   ICON COLORS
+========================= */
+.feature-icon-balance {
+    background: var(--color-balance);
+}
+
+.feature-icon-income {
+    background: var(--color-income);
+}
+
+.feature-icon-expense {
+    background: var(--color-expense);
+}
+
+.feature-icon-debt {
+    background: var(--color-debt);
+}
+
+.feature-icon-savings {
+    background: var(--color-savings);
+}
+
+/* =========================
+   TABLET Y MOBILE GRANDE
+========================= */
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 16px;
+    }
+
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* =========================
+   MOBILE PEQUEÑO
+========================= */
+@media (max-width: 480px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .feature-card {
+        padding: 16px;
+    }
+
+    .feature-icon {
+        width: 35px;
+        height: 35px;
+    }
+}

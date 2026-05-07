@@ -1,0 +1,79 @@
+.chart-card {
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--space-lg);
+
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+
+    width: 100%;
+}
+
+.chart-area {
+    flex: 1;
+    min-height: 200px;
+    /* aquí irá la gráfica */
+}
+
+.chart-bars {
+    display: flex;
+    gap: 10px;
+}
+
+.chart-bar-item {
+    flex: 1;
+    height: 80px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-bar-item.bg-income {
+    background: var(--color-income);
+}
+
+.chart-bar-item.bg-expense {
+    background: var(--color-expense);
+}
+
+.chart-bar-item.bg-debt {
+    background: var(--color-debt);
+}
+
+.chart-bar-item.bg-balance {
+    background: var(--color-balance);
+}
+
+.chart-bar-item.bg-savings {
+    background: var(--color-savings);
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+@media (max-width: 768px) {
+
+   .chart-bars {
+      overflow-x: auto;
+   }
+
+   .chart-bar-item {
+      min-width: 50px;
+   }
+
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+@media (max-width: 360px) {
+
+   .chart-bar-item {
+      min-width: 40px;
+      height: 60px;
+   }
+
+}

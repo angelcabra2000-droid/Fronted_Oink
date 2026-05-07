@@ -1,0 +1,112 @@
+/* Base */
+.flatpickr-calendar {
+    font-family: var(--font-primary);
+    border-radius: 10px;
+    border: 8px solid var(--color-input-text);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Día seleccionado */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: var(--fp-color);
+    border-color: var(--fp-color);
+}
+
+/* Hover en días */
+.flatpickr-day:hover {
+    background: var(--fp-hover-bg);
+    color: var(--fp-color);
+    border-color: transparent;
+}
+
+/* Header del calendario */
+.flatpickr-months .flatpickr-month,
+.flatpickr-weekdays {
+    background: var(--fp-color);
+    color: var(--color-text);
+    border-radius: 10px 10px 0 0;
+}
+
+.flatpickr-current-month,
+.flatpickr-weekday {
+    color: var(--color-text) !important;
+}
+
+/* Variantes */
+.form-income {
+    --fp-color: var(--color-income);
+    --fp-hover-bg: rgba(0, 166, 62, 0.1);
+}
+
+.form-expense {
+    --fp-color: var(--color-expense);
+    --fp-hover-bg: rgba(231, 0, 11, 0.1);
+}
+
+.form-debt {
+    --fp-color: var(--color-debt);
+    --fp-hover-bg: rgba(152, 16, 250, 0.1);
+}
+
+/* Texto del mes y año */
+.flatpickr-current-month .cur-month,
+.flatpickr-current-month .numInputWrapper,
+.flatpickr-current-month input.cur-year {
+    color: var(--color-text) !important;
+    fill: var(--color-text) !important;
+}
+
+/* Flechas (next / prev) */
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: var(--color-text) !important;
+}
+
+/* Hover flechas */
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+    fill: --color-input-text !important;
+}
+
+/* Días de la semana (Lu, Ma, etc.) */
+.flatpickr-weekday {
+    color: var(--color-input-text) !important;
+}
+
+/* Evitar que inputs internos se vean "blancos sobre blanco" */
+.flatpickr-current-month input {
+    color: var(--color-text) !important;
+    background: transparent;
+}
+
+/* Placeholder invisible fix (por si acaso) */
+.flatpickr-calendar span {
+    color: inherit;
+}
+
+.flatpickr-input {
+    padding: 8px 12px;
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+
+@media (max-width: 768px) {
+   .flatpickr-calendar {
+      width: 100%;
+      max-width: 300px;
+   }
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+
+@media (max-width: 360px) {
+   .flatpickr-calendar {
+      transform: scale(0.9);
+      transform-origin: top center;
+   }
+}

@@ -1,0 +1,47 @@
+.debt-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+.debt-item-stats {
+    display: flex;
+    gap: var(--space-xl);
+}
+
+.debt-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex: 1;
+}
+
+.debt-item-progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+
+@media (max-width: 768px) {
+   .debt-item-stats {
+      flex-direction: column;
+      gap: var(--space-sm);
+   }
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+
+@media (max-width: 360px) {
+   .debt-item {
+      padding: 10px;
+   }
+}

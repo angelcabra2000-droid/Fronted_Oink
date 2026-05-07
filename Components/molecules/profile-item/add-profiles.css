@@ -1,0 +1,53 @@
+.profile-add {
+
+    --add-color: 74, 85, 101;
+    /* mismo gris que tu texto */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    height: 45px;
+    width: 100%;
+
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    border: 2px solid rgb(var(--add-color));
+    background-color: rgb(var(--add-color), 0.15);
+
+    color: rgb(var(--add-color));
+
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+}
+
+/* ICONO */
+
+.profile-add .icon {
+    filter: grayscale(100%) brightness(0.7);
+}
+
+/* HOVER */
+
+.profile-add:hover {
+
+    background: rgb(var(--add-color));
+
+}
+
+/* TEXTO BLANCO */
+
+.profile-add:hover .text {
+    color: white;
+}
+
+/* ICONO BLANCO */
+
+.profile-add:hover .icon {
+    filter: brightness(0) invert(1);
+}

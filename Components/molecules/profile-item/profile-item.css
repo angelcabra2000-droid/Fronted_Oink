@@ -1,0 +1,37 @@
+.profile-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+
+    height: 45px;
+    width: 100%;
+
+    padding: 0 16px;
+    border-radius: 10px;
+
+    /* 🔥 50% del color */
+    background: color-mix(in srgb, var(--profile-color) 50%, transparent);
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ACTIVO / HOVER → 100% */
+.profile-item:hover,
+.profile-item.active {
+    background: var(--profile-color);
+}
+
+/* TEXTO */
+.profile-item:hover .text,
+.profile-item.active .text {
+    color: white;
+}
+
+/* AVATAR */
+.profile-item:hover .profile-avatar,
+.profile-item.active .profile-avatar {
+    border-color: white;
+    color: white;
+}

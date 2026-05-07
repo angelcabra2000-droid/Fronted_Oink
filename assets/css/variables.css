@@ -1,0 +1,116 @@
+:root {
+
+    /* =========================
+   TIPOGRAFÍA
+========================= */
+
+    --font-primary: 'Inter', sans-serif;
+
+
+    /* =========================
+   COLORES DE TEXTO
+========================= */
+
+    --color-title: #0A0A0A;
+    --color-text: #1F2124;
+    --color-text-light: #4A5565;
+
+    /* texto dentro de inputs con 50% */
+    --color-input-text: rgba(10, 10, 10, 0.5);
+
+
+    /* =========================
+   COLORES FINANCIEROS
+========================= */
+
+    --color-balance: #155DFC;
+    --color-income: #00A63E;
+    --color-expense: #E7000B;
+    --color-debt: #9810FA;
+    --color-savings: #F97316;
+
+    /* =========================
+   COLORES FINANCIEROS CLAROS
+========================= */
+
+    --color-balance-claro: #DBEAFE;
+    --color-income-claro: #DCFCE7;
+    --color-expense-claro: #FFE2E2;
+    --color-debt-claro: #F3E8FF;
+    --color-savings-claro: #FED7AA;
+
+
+
+    /* =========================
+   COLORES GENERALES
+========================= */
+
+    --color-background: #F9FAFB;
+
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    --color-border: #E5E7EB;
+
+
+    /* =========================
+   ESPACIADOS BASE
+========================= */
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+    /* =========================
+   Color Perfiles
+========================= */
+
+    --color-primary: var(--color-1);
+
+    --color-1: #E11D2E;
+    /* rojo */
+    --color-2: #F97316;
+    /* naranja */
+    --color-3: #EAB308;
+    /* amarillo */
+    --color-4: #22C55E;
+    /* verde */
+    --color-5: #06B6D4;
+    /* cyan */
+    --color-6: #3B82F6;
+    /* azul */
+    --color-7: #6366F1;
+    /* índigo */
+    --color-8: #A855F7;
+    /* morado */
+    --color-9: #EC4899;
+    /* rosado */
+    --color-10: #F43F5E;
+    /* rosa fuerte */
+
+    /* =========================
+   TRANSICIONES
+========================= */
+
+    --transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+
+    /* =========================
+   ICON FILTERS
+========================= */
+    --filter-balance: brightness(0) saturate(100%) invert(23%) sepia(94%) saturate(2000%) hue-rotate(214deg);
+    --filter-income: brightness(0) saturate(100%) invert(39%) sepia(98%) saturate(600%) hue-rotate(100deg);
+    --filter-expense: brightness(0) saturate(100%) invert(19%) sepia(97%) saturate(6000%) hue-rotate(355deg);
+    --filter-debt: brightness(0) saturate(100%) invert(30%) sepia(99%) saturate(2000%) hue-rotate(260deg);
+    --filter-savings: brightness(0) saturate(100%) invert(58%) sepia(95%) saturate(1500%) hue-rotate(350deg);
+
+    /* =========================
+    TOM SELECT
+    ========================= */
+    --ts-focus-color: var(--color-income);
+    --ts-hover-bg: rgba(0, 166, 62, 0.1);
+    --ts-hover-color: var(--color-income);
+
+}

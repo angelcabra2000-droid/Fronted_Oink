@@ -1,0 +1,56 @@
+.history-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: var(--space-lg);
+
+    background: var(--color-white);
+    border-radius: 10px;
+}
+
+.history-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.history-card-login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+
+    padding: var(--space-lg);
+
+    background: var(--color-white);
+    border-radius: 10px;
+
+    width: 100%;
+    max-width: 420px;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .history-card {
+        gap: 20px;
+        padding: var(--space-md);
+        border-radius: 8px;
+    }
+
+    .history-card-login {
+        max-width: 100%;
+        padding: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .history-card {
+        gap: 16px;
+        padding: var(--space-sm);
+    }
+}

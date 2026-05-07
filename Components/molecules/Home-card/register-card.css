@@ -1,0 +1,33 @@
+.register-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+
+    padding: var(--space-lg);
+
+
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+.register-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+
+    margin-bottom: var(--space-xs);
+}
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+@media (max-width: 360px) {
+
+   .register-card {
+      padding: 12px;
+   }
+
+   .register-card-header {
+      flex-wrap: wrap;
+   }
+
+}

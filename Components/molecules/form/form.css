@@ -1,0 +1,121 @@
+/* Contenedor principal */
+.form {
+    margin: 16px;
+    padding: 16px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* 🔥 Grid de 2 columnas */
+.fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    /* espacio entre columnas y filas */
+}
+
+.fields-login {
+    display: grid;
+    flex-direction: column;
+    gap: 16px;
+    /* espacio entre columnas y filas */
+}
+
+
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* 🔥 IMPORTANTE */
+.field .text {
+    margin: 0;
+}
+
+.field .input {
+    margin: 0;
+}
+
+/* Botones */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.form-income {
+    background: var(--color-income-claro);
+    display: none;
+}
+
+.form-income.active {
+    display: block;
+}
+
+.form-expense {
+    background: var(--color-expense-claro);
+    display: none;
+}
+
+.form-expense {
+    display: none;
+}
+
+.form-expense.active {
+    display: block;
+}
+
+.form-debt {
+    background: var(--color-debt-claro);
+    display: none;
+}
+
+.form-debt.active {
+    display: block;
+}
+
+.form-savings {
+    background: var(--color-savings-claro);
+    display: none;
+}
+
+
+.form-savings.active {
+    display: block;
+}
+
+.form-balance {
+    background: var(--color-balance-claro);
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+
+@media (max-width: 768px) {
+    .fields {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+
+@media (max-width: 360px) {
+    .form {
+        margin: 10px;
+        padding: 10px;
+    }
+}

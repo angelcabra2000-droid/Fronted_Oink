@@ -1,0 +1,47 @@
+.financial-state-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+
+    padding: var(--space-lg);
+
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+
+.financial-state-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.financial-state-total {
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+}
+
+/* =========================
+   RESPONSIVE MOBILE GRANDE
+========================= */
+
+@media (max-width: 768px) {
+
+   .financial-state-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+   }
+
+}
+
+/* =========================
+   RESPONSIVE MOBILE PEQUEÑO
+========================= */
+
+@media (max-width: 360px) {
+
+   .financial-state-card {
+      padding: 12px;
+   }
+
+}

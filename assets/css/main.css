@@ -1,0 +1,276 @@
+/* =========================
+   VARIABLES
+========================= */
+@import url("./variables.css");
+
+/* =========================
+   ASSETS
+========================= */
+@import url("../../assets/icons/icons.css");
+@import url("../../assets/Img/img.css");
+
+/* =========================
+   ATOMS
+========================= */
+@import url("../../Components/atoms/button/button.css");
+@import url("../../Components/atoms/input/input.css");
+@import url("../../Components/atoms/typography/typography.css");
+@import url("../../Components/atoms/Icon_User/Icon_User.css");
+
+/* =========================
+   MOLECULES
+========================= */
+@import url("../../Components/molecules/nav-items/nav-items.css");
+@import url("../../Components/molecules/header/header.css");
+@import url("../../Components/molecules/profile-item/profile-item.css");
+@import url("../../Components/molecules/profile-item/add-profiles.css");
+@import url("../../Components/molecules/Title_pages/Title_Pages.css");
+@import url("../../Components/molecules/icon-container/icon-container.css");
+@import url("../../Components/molecules/Home-card/Home-card_1.css");
+@import url("../../Components/molecules/Home-card/register-card.css");
+@import url("../../Components/molecules/Home-card/distribution-card.css");
+@import url("../../Components/molecules/Home-card/financial-state-card.css");
+@import url("../../Components/molecules/Home-card/chart-card.css");
+@import url("../../Components/molecules/historial-card/historial-card.css");
+@import url("../../Components/molecules/debt-item/debt-item.css");
+@import url("../../Components/molecules/form/form.css");
+@import url("../../Components/molecules/form/fecha.css");
+@import url("../../Components/molecules/form/list.css");
+@import url("../../Components/molecules/landing/text.css");
+@import url("../../Components/molecules/landing/cards_info.css");
+@import url("../../Components/molecules/landing/card_planes.css");
+@import url("../../Components/molecules/analisis/graf_1.css");
+@import url("../../Components/molecules/analisis/graf_2.css");
+
+/* =========================
+   ORGANISMS
+========================= */
+@import url("../../Components/organims/navegation/navegation.css");
+@import url("../../Components/organims/navegation/landing-nav.css");
+@import url("../../Components/organims/profiles/profiles.css");
+@import url("../../Components/organims/Home/Cards_1.css");
+@import url("../../Components/organims/Home/analysis-row.css");
+@import url("../../Components/organims/historial-card/historial-card.css");
+@import url("../../Components/organims/landing/info_cards.css");
+@import url("../../Components/organims/landing/planes.css");
+@import url("../../Components/organims/analisis/analisis.css");
+
+/* =========================
+   RESET
+========================= */
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   word-break: break-word;
+}
+
+img {
+   max-width: 100%;
+   height: auto;
+   display: block;
+}
+
+body {
+   font-family: var(--font-primary);
+   background: var(--color-background);
+   color: var(--color-text);
+   min-height: 100vh;
+   padding: 0 100px 50px;
+   overflow-x: hidden;
+   width: 100%;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 1100;
+
+   height: 70px;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   padding: 0 var(--space-lg);
+
+   background: var(--color-white);
+   border-bottom: 1px solid var(--color-border);
+}
+
+/* =========================
+   MENU HAMBURGUESA
+========================= */
+.menu-toggle {
+   display: none;
+   align-items: center;
+   justify-content: center;
+
+   background: none;
+   border: none;
+   padding: 8px;
+   cursor: pointer;
+}
+
+.menu-icon {
+   width: 28px;
+   height: 28px;
+   display: block;
+}
+
+.menu-toggle:hover {
+   opacity: 0.8;
+}
+
+.menu-toggle:active {
+   transform: scale(0.95);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+   position: fixed;
+   top: 70px;
+   left: 100px;
+   bottom: 50px;
+   width: 260px;
+
+   display: flex;
+   flex-direction: column;
+   gap: var(--space-sm);
+
+   padding: var(--space-md);
+   overflow-y: auto;
+
+   background: var(--color-background);
+}
+
+/* =========================
+   SIDEBAR OVERLAY
+========================= */
+.sidebar-overlay {
+   position: fixed;
+   top: 65px;
+   left: 0;
+   right: 0;
+   bottom: 0;
+
+   z-index: 999;
+
+   background: rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(3px);
+
+   opacity: 0;
+   visibility: hidden;
+   pointer-events: none;
+
+   transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.active {
+   opacity: 1;
+   visibility: visible;
+   pointer-events: auto;
+}
+
+.page-wrapper {
+   display: flex;
+   min-height: 100vh;
+   padding-top: 70px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.content {
+   flex: 1;
+   min-width: 0;
+   margin-left: 260px;
+   padding: var(--space-lg);
+
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+}
+
+.content-inner {
+   max-width: 900px;
+   margin: 0 auto;
+
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+}
+
+/* =========================
+   RESPONSIVE - TABLET / MOBILE
+========================= */
+@media (max-width: 768px) {
+   body {
+      padding: 0;
+   }
+
+   .page-wrapper {
+      flex-direction: column;
+      min-height: 100vh;
+      padding-top: 65px;
+   }
+
+   .menu-toggle {
+      display: flex !important;
+   }
+
+   .sidebar {
+      position: fixed;
+      top: 65px;
+      right: -280px;
+      left: auto;
+      width: 280px;
+      height: calc(100dvh - 65px);
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      z-index: 1000;
+   }
+
+   .sidebar.active {
+      right: 0;
+   }
+
+   .content {
+      width: 100%;
+      margin-left: 0;
+      padding: 16px;
+   }
+
+   .content-inner {
+      max-width: 100%;
+   }
+
+   #landing-nav {
+      position: static;
+      z-index: auto;
+
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+
+      background: transparent;
+   }
+}
+
+@media (min-width: 769px) {
+   .menu-toggle {
+      display: none !important;
+   }
+
+   .sidebar-overlay {
+      display: none;
+   }
+}
