@@ -1,6 +1,8 @@
 const loginModal = document.getElementById("login-modal");
 const registerModal = document.getElementById("register-modal");
 const forgotModal = document.getElementById("forgot-modal");
+const plansModal = document.getElementById("plans-modal");
+const paymentModal = document.getElementById("payment-modal");
 
 document.addEventListener("click", (e) => {
 
@@ -9,21 +11,41 @@ document.addEventListener("click", (e) => {
         loginModal?.classList.remove("hidden");
     }
 
+    // 🟣 ABRIR PLANES
+    if (e.target.closest("#btn-go-register-from-login")) {
+
+        loginModal?.classList.add("hidden");
+
+        plansModal?.classList.remove("hidden");
+    }
+
     // 🟣 ABRIR REGISTRO
     if (e.target.closest("#btn-go-register")) {
         loginModal?.classList.add("hidden");
         registerModal?.classList.remove("hidden");
     }
 
-    // 🔄 LOGIN → REGISTER
-    if (e.target.closest("#btn-go-register-from-login")) {
-        loginModal?.classList.add("hidden");
+    // 🧾 REGISTRO → PAGO
+    if (e.target.closest("#btn-open-payment")) {
+
+        registerModal?.classList.add("hidden");
+
+        paymentModal?.classList.remove("hidden");
+    }
+
+    // 🔙 PAGO → REGISTRO
+    if (e.target.closest("#btn-back-register")) {
+
+        paymentModal?.classList.add("hidden");
+
         registerModal?.classList.remove("hidden");
     }
 
     // 🔄 REGISTER → LOGIN
     if (e.target.closest("#btn-go-login-from-register")) {
+
         registerModal?.classList.add("hidden");
+
         loginModal?.classList.remove("hidden");
     }
 
@@ -38,13 +60,30 @@ document.addEventListener("click", (e) => {
         forgotModal?.classList.add("hidden");
         loginModal?.classList.remove("hidden");
     }
+    // 💳 PLANES → REGISTRO
+    if (e.target.closest("#btn-open-register")) {
+
+        plansModal?.classList.add("hidden");
+
+        registerModal?.classList.remove("hidden");
+    }
+
+    // 💳 PAGO → LOGIN
+    if (e.target.closest("#btn-finish-payment")) {
+
+        paymentModal?.classList.add("hidden");
+
+        loginModal?.classList.remove("hidden");
+    }
 
     // ❌ CERRAR TODOS (overlay o X)
     if (e.target.closest(".modal-overlay") || e.target.closest(".modal-close")) {
         loginModal?.classList.add("hidden");
         registerModal?.classList.add("hidden");
         forgotModal?.classList.add("hidden");
+        plansModal?.classList.add("hidden");
         document.getElementById("profile-modal")?.classList.add("hidden");
+        paymentModal?.classList.add("hidden");
     }
 
     // 👤 PERFIL (abrir)
@@ -76,4 +115,6 @@ document.addEventListener("click", (e) => {
         document.querySelector('[data-page="home"]')
             ?.classList.add('active');
     }
+
+
 });
