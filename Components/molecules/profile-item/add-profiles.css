@@ -51,3 +51,19 @@
 .profile-add:hover .icon {
     filter: brightness(0) invert(1);
 }
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+
+    width: 100%;
+    margin-top: 12px;
+}
+
+.profile-actions .icon-btn {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
