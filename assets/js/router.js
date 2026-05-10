@@ -44,6 +44,20 @@ async function loadPage(page) {
             });
         }
 
+        const selectEditEl = document.querySelector('#categoria-select-edit');
+        if (selectEditEl) {
+            new TomSelect(selectEditEl, { create: false });
+        }
+
+        const dateEditEl = document.querySelector('.input-date-edit');
+        if (dateEditEl) {
+            flatpickr(dateEditEl, {
+                locale: 'es',
+                dateFormat: 'd/m/Y',
+                disableMobile: true,
+            });
+        }
+
         // =========================
         // 📊 CHARTS (ahora externos)
         // =========================
@@ -132,6 +146,26 @@ document.addEventListener("click", (e) => {
 
     if (e.target.closest(".btn-cancel-savings")) {
         e.target.closest(".form-savings")?.classList.remove("active");
+    }
+
+    // 🟣 DEUDAS - EDITAR
+    if (e.target.closest(".btn-edit-debt")) {
+        const card = e.target.closest(".history-card");
+        card.querySelector(".form-edit-debt")?.classList.add("active");
+    }
+
+    if (e.target.closest(".btn-cancel-edit-debt")) {
+        e.target.closest(".form-edit-debt")?.classList.remove("active");
+    }
+
+    // 🟡 AHORROS - EDITAR
+    if (e.target.closest(".btn-edit-savings")) {
+        const card = e.target.closest(".history-card");
+        card.querySelector(".form-edit-savings")?.classList.add("active");
+    }
+
+    if (e.target.closest(".btn-cancel-edit-savings")) {
+        e.target.closest(".form-edit-savings")?.classList.remove("active");
     }
 
 
