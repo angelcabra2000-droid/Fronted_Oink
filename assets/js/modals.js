@@ -9,6 +9,8 @@ const deleteIncomeModal = document.getElementById("delete-income-modal");
 const deleteExpenseModal = document.getElementById("delete-expense-modal");
 const editDebtModal = document.getElementById("edit-debt-modal");
 const deleteDebtModal = document.getElementById("delete-debt-modal");
+const editSavingsModal = document.getElementById("edit-savings-modal");
+const deleteSavingsModal = document.getElementById("delete-savings-modal");
 
 document.addEventListener("click", (e) => {
 
@@ -96,6 +98,8 @@ document.addEventListener("click", (e) => {
         deleteExpenseModal?.classList.add("hidden");
         editDebtModal?.classList.add("hidden");
         deleteDebtModal?.classList.add("hidden");
+        editSavingsModal?.classList.add("hidden");
+        deleteSavingsModal?.classList.add("hidden");
     }
 
     // 👤 PERFIL (abrir)
@@ -204,5 +208,24 @@ document.addEventListener("click", (e) => {
         deleteDebtModal?.classList.add("hidden");
     }
 
+    // ✏️ ABRIR EDITAR AHORRO
+    if (e.target.closest(".btn-edit-savings")) {
+        editSavingsModal?.classList.remove("hidden");
+    }
+
+    // 🗑️ ABRIR ELIMINAR AHORRO
+    if (e.target.closest(".btn-delete-savings")) {
+        deleteSavingsModal?.classList.remove("hidden");
+    }
+
+    // ❌ CERRAR EDITAR AHORRO
+    if (e.target.closest("#btn-cancel-edit-savings")) {
+        editSavingsModal?.classList.add("hidden");
+    }
+
+    // ❌ CERRAR ELIMINAR AHORRO
+    if (e.target.closest("#btn-cancel-delete-savings")) {
+        deleteSavingsModal?.classList.add("hidden");
+    }
 
 });

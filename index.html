@@ -282,11 +282,11 @@
                     </div>
 
                     <div class="field">
-                        <button id="btn-save-profile" class="btn btn-base">
+                        <button id="btn-save-profile" class="btn btn-balance">
                             Guardar cambios
                         </button>
 
-                        <button id="btn-cancel-edit-profile" class="btn btn-balance">
+                        <button id="btn-cancel-edit-profile" class="btn btn-base">
                             Cancelar
                         </button>
                     </div>
@@ -315,11 +315,11 @@
 
                     <div class="field">
 
-                        <button id="btn-confirm-delete-profile" class="btn btn-expense">
+                        <button id="btn-confirm-delete-profile" class="btn btn-balance">
                             Eliminar
                         </button>
 
-                        <button id="btn-cancel-delete-profile" class="btn btn-balance">
+                        <button id="btn-cancel-delete-profile" class="btn btn-base">
                             Cancelar
                         </button>
 
@@ -693,6 +693,45 @@
                         <button id="btn-cancel-delete-debt" class="btn btn-base">Cancelar</button>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-savings-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2 class="title-main">Editar Ahorro</h2>
+            <div class="form form-savings active">
+                <div class="fields-login">
+                    <div class="field">
+                        <span class="text text-secondary">Nombre</span>
+                        <input class="input" placeholder="Nombre">
+                    </div>
+                    <div class="field">
+                        <span class="text text-secondary">Porcentaje de Ahorro</span>
+                        <input class="input" placeholder="Porcentaje de Ahorro">
+                    </div>
+                    <div class="field">
+                        <button id="btn-confirm-edit-savings" class="btn btn-savings">Guardar</button>
+                        <button id="btn-cancel-edit-savings" class="btn btn-base">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-savings-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2 class="title-main">Eliminar Ahorro</h2>
+            <div class="form form-savings active">
+                <div class="fields-login">
+                    <p class="text text-secondary">¿Seguro que deseas eliminar este ahorro?</p>
+                    <div class="field">
+                        <button id="btn-confirm-delete-savings" class="btn btn-savings">Eliminar</button>
+                        <button id="btn-cancel-delete-savings" class="btn btn-base">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
