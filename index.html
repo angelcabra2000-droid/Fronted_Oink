@@ -60,14 +60,14 @@
                     <div class="profile-actions">
 
                         <button class="icon-btn btn-edit-income">
-                            <img src="assets/icons/edit.svg" class="icon icon-sm icon-balance">
+                            <img src="assets/icons/edit.svg" class="icon icon-sm icon-balance" id="btn-edit-profile">
                         </button>
 
-                        <button class="icon-btn">
-                            <img src="assets/icons/trash.svg" class="icon icon-sm icon-expense">
+                        <button class=" icon-btn">
+                            <img src="assets/icons/trash.svg" class="icon icon-sm icon-expense" id="btn-delete-profile">
                         </button>
 
-                        <button class="icon-btn">
+                        <button class=" icon-btn">
                             <img src="assets/icons/config.svg" class="icon icon-sm">
                         </button>
 
@@ -255,6 +255,76 @@
                     </div>
 
                 </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="edit-profile-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">Editar perfil</h2>
+
+            <div class="form form-balance">
+
+                <div class="fields-login">
+
+                    <div class="field">
+                        <span class="text text-secondary">
+                            Nuevo nombre
+                        </span>
+
+                        <input id="edit-profile-name" class="input" placeholder="Nuevo nombre">
+                    </div>
+
+                    <div class="field">
+                        <button id="btn-save-profile" class="btn btn-base">
+                            Guardar cambios
+                        </button>
+
+                        <button id="btn-cancel-edit-profile" class="btn btn-balance">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="delete-profile-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">Eliminar perfil</h2>
+
+            <div class="form form-balance">
+
+                <div class="fields-login">
+
+                    <p class="text text-secondary">
+                        ¿Seguro que deseas eliminar este perfil?
+                    </p>
+
+                    <div class="field">
+
+                        <button id="btn-confirm-delete-profile" class="btn btn-base">
+                            Eliminar
+                        </button>
+
+                        <button id="btn-cancel-delete-profile" class="btn btn-balance">
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>

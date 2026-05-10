@@ -3,6 +3,8 @@ const registerModal = document.getElementById("register-modal");
 const forgotModal = document.getElementById("forgot-modal");
 const plansModal = document.getElementById("plans-modal");
 const paymentModal = document.getElementById("payment-modal");
+const editProfileModal = document.getElementById("edit-profile-modal");
+const deleteProfileModal = document.getElementById("delete-profile-modal");
 
 document.addEventListener("click", (e) => {
 
@@ -84,6 +86,8 @@ document.addEventListener("click", (e) => {
         plansModal?.classList.add("hidden");
         document.getElementById("profile-modal")?.classList.add("hidden");
         paymentModal?.classList.add("hidden");
+        editProfileModal?.classList.add("hidden");
+        deleteProfileModal?.classList.add("hidden");
     }
 
     // 👤 PERFIL (abrir)
@@ -98,6 +102,34 @@ document.addEventListener("click", (e) => {
         e.target.closest("#btn-cancel-profile")
     ) {
         document.getElementById("profile-modal")?.classList.add("hidden");
+    }
+
+    // ✏️ ABRIR EDITAR PERFIL
+    if (e.target.closest("#btn-edit-profile")) {
+
+        editProfileModal?.classList.remove("hidden");
+    }
+
+    // 🗑️ ABRIR ELIMINAR PERFIL
+    if (e.target.closest("#btn-delete-profile")) {
+
+        deleteProfileModal?.classList.remove("hidden");
+    }
+
+    // ❌ CERRAR EDITAR PERFIL
+    if (
+        e.target.closest("#btn-cancel-edit-profile")
+    ) {
+
+        editProfileModal?.classList.add("hidden");
+    }
+
+    // ❌ CERRAR ELIMINAR PERFIL
+    if (
+        e.target.closest("#btn-cancel-delete-profile")
+    ) {
+
+        deleteProfileModal?.classList.add("hidden");
     }
 
     // 🚀 LOGIN → ENTRAR APP
