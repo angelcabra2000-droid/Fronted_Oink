@@ -618,6 +618,86 @@
 
     </div>
 
+    <div id="edit-debt-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2 class="title-main">Editar Deuda</h2>
+
+            <div class="form form-debt active">
+                <div class="fields-login">
+
+                    <div class="field">
+                        <span class="text text-secondary">Nombre</span>
+                        <input class="input" placeholder="Nombre">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Total Monto</span>
+                        <input class="input" placeholder="Total Monto">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Monto Restante</span>
+                        <input class="input" placeholder="Monto Restante">
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Categoría</span>
+                        <select class="input input-select">
+                            <option value="" disabled selected>Selecciona una categoría</option>
+                            <option value="tarjeta">Tarjeta de crédito</option>
+                            <option value="prestamo">Préstamo personal</option>
+                            <option value="hipoteca">Hipoteca</option>
+                            <option value="vehiculo">Crédito vehículo</option>
+                            <option value="estudiantil">Préstamo estudiantil</option>
+                            <option value="familiar">Deuda familiar</option>
+                            <option value="negocio">Deuda de negocio</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Fecha de Vencimiento</span>
+                        <input class="input input-date" placeholder="Selecciona una fecha" readonly>
+                    </div>
+
+                    <div class="field">
+                        <span class="text text-secondary">Tasa de interés</span>
+                        <input class="input" placeholder="Tasa de interés">
+                    </div>
+
+                    <div class="field">
+                        <button id="btn-confirm-edit-debt" class="btn btn-debt">Guardar</button>
+                        <button id="btn-cancel-edit-debt" class="btn btn-base">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-debt-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2 class="title-main">Eliminar Deuda</h2>
+
+            <div class="form form-debt active">
+                <div class="fields-login">
+
+                    <p class="text text-secondary">
+                        ¿Seguro que deseas eliminar esta deuda?
+                    </p>
+
+                    <div class="field">
+                        <button id="btn-confirm-delete-debt" class="btn btn-debt">Eliminar</button>
+                        <button id="btn-cancel-delete-debt" class="btn btn-base">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 

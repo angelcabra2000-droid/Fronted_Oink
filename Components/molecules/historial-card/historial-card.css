@@ -1,4 +1,6 @@
-/* history-item.css */
+/* =========================
+   HISTORY ITEM
+========================= */
 .history-item {
    display: flex;
    align-items: center;
@@ -29,10 +31,33 @@
 }
 
 /* =========================
+   DEBT ITEM
+========================= */
+.debt-top {
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-between;
+   gap: var(--space-md);
+}
+
+.debt-info {
+   display: flex;
+   flex-direction: column;
+   gap: var(--space-xs);
+}
+
+.debt-actions {
+   display: flex;
+   align-items: center;
+   gap: var(--space-sm);
+   flex-shrink: 0;
+}
+
+/* =========================
    RESPONSIVE MOBILE GRANDE
 ========================= */
-
 @media (max-width: 768px) {
+
    .history-card {
       padding: var(--space-md);
    }
@@ -48,12 +73,19 @@
       justify-content: space-between;
    }
 
+   .debt-top {
+      flex-direction: row;
+      align-items: flex-start;
+   }
+
+   .debt-actions {
+      flex-direction: column;
+   }
 }
 
 /* =========================
    RESPONSIVE MOBILE PEQUEÑO
 ========================= */
-
 @media (max-width: 360px) {
 
    .history-item-meta {
@@ -65,5 +97,4 @@
       align-items: stretch;
       gap: 8px;
    }
-
 }

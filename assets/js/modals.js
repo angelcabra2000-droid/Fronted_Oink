@@ -7,6 +7,8 @@ const editProfileModal = document.getElementById("edit-profile-modal");
 const deleteProfileModal = document.getElementById("delete-profile-modal");
 const deleteIncomeModal = document.getElementById("delete-income-modal");
 const deleteExpenseModal = document.getElementById("delete-expense-modal");
+const editDebtModal = document.getElementById("edit-debt-modal");
+const deleteDebtModal = document.getElementById("delete-debt-modal");
 
 document.addEventListener("click", (e) => {
 
@@ -92,6 +94,8 @@ document.addEventListener("click", (e) => {
         deleteProfileModal?.classList.add("hidden");
         deleteIncomeModal?.classList.add("hidden");
         deleteExpenseModal?.classList.add("hidden");
+        editDebtModal?.classList.add("hidden");
+        deleteDebtModal?.classList.add("hidden");
     }
 
     // 👤 PERFIL (abrir)
@@ -179,5 +183,26 @@ document.addEventListener("click", (e) => {
 
         deleteIncomeModal?.classList.add("hidden");
     }
+
+    // ✏️ ABRIR EDITAR DEUDA
+    if (e.target.closest(".btn-edit-debt")) {
+        editDebtModal?.classList.remove("hidden");
+    }
+
+    // 🗑️ ABRIR ELIMINAR DEUDA
+    if (e.target.closest(".btn-delete-debt")) {
+        deleteDebtModal?.classList.remove("hidden");
+    }
+
+    // ❌ CERRAR EDITAR DEUDA
+    if (e.target.closest("#btn-cancel-edit-debt")) {
+        editDebtModal?.classList.add("hidden");
+    }
+
+    // ❌ CERRAR ELIMINAR DEUDA
+    if (e.target.closest("#btn-cancel-delete-debt")) {
+        deleteDebtModal?.classList.add("hidden");
+    }
+
 
 });

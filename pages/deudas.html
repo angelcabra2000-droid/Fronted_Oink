@@ -1,14 +1,19 @@
 <div class="history-card">
+
     <div class="history-card-header">
         <span class="title title-main">Deudas</span>
+
         <button class="btn btn-debt btn-add-debt" style="width: auto; padding: 10px 16px;">
             <img src="assets/icons/plus.svg" class="icon icon-sm" style="filter: brightness(0) invert(1);">
             Agregar Deudas
         </button>
     </div>
 
+    <!-- FORMULARIO -->
     <div class="form form-debt">
+
         <div class="fields">
+
             <div class="field">
                 <span class="text text-secondary">Nombre</span>
                 <input class="input" placeholder="Nombre">
@@ -26,6 +31,7 @@
 
             <div class="field">
                 <span class="text text-secondary">Categoria</span>
+
                 <select id="categoria-select">
                     <option value="" disabled selected>Selecciona una categoría</option>
                     <option value="tarjeta">Tarjeta de crédito</option>
@@ -48,63 +54,140 @@
                 <span class="text text-secondary">Tasa de interes</span>
                 <input class="input" placeholder="Tasa de interes">
             </div>
+
         </div>
 
         <div class="actions">
             <button class="btn btn-debt">Guardar</button>
             <button class="btn btn-base btn-cancel-debt">Cancelar</button>
         </div>
+
     </div>
 
+    <!-- ITEM DEUDA -->
     <div class="debt-item">
-        <div class="debt-item-header">
-            <div class="history-item-info">
-                <span class="text text-main" style="font-weight: 600;">Alkosoto</span>
+
+        <!-- HEADER -->
+        <div class="debt-top">
+
+            <div class="debt-info">
+
+                <span class="text text-main debt-title">
+                    Alkosoto
+                </span>
+
                 <div class="history-item-meta">
-                    <button class="icon-btn">
-                        <img src="assets/icons/calendar.svg" class="icon icon-sm">
-                    </button>
-                    <span class="text text-secondary  text-light"">26/02/2026</span>
-                    <span class=" text text-secondary text-light"">Interes anual: 10%</span>
-                </div>
-                <div class="history-item-meta">
+
                     <span class="icon-btn">
-                        <img src="assets/icons/money.svg" class="icon icon-sm ">
+                        <img src="assets/icons/calendar.svg" class="icon icon-sm">
                     </span>
-                    <span class="text text-secondary  text-light">Categoria</span>
-                    <span class="text text-secondary  text-light">Tarjeta de credito</span>
+
+                    <span class="text text-secondary text-light">
+                        26/02/2026
+                    </span>
+
+                    <span class="text text-secondary text-light">
+                        Interes anual: 10%
+                    </span>
+
+                </div>
+
+                <div class="history-item-meta">
+
+                    <span class="icon-btn">
+                        <img src="assets/icons/money.svg" class="icon icon-sm">
+                    </span>
+
+                    <span class="text text-secondary text-light">
+                        Categoria
+                    </span>
+
+                    <span class="text text-secondary text-light">
+                        Tarjeta de credito
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- BOTONES -->
+            <div class="debt-actions">
+
+                <button class="icon-btn btn-edit-debt">
+                    <img src="assets/icons/edit.svg" class="icon icon-sm icon-balance">
+                </button>
+
+                <button class="icon-btn btn-delete-debt">
+                    <img src="assets/icons/trash.svg" class="icon icon-sm icon-expense">
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ESTADISTICAS -->
+        <div class="debt-item-stats">
+
+            <div class="debt-stat">
+                <span class="text text-secondary text-light">
+                    Total Original
+                </span>
+
+                <span class="text text-main debt-value">
+                    $5.000.000
+                </span>
+            </div>
+
+            <div class="debt-stat">
+                <span class="text text-secondary text-light">
+                    Restante
+                </span>
+
+                <span class="text text-main text-debt debt-value">
+                    $2.500.000
+                </span>
+            </div>
+
+            <div class="debt-stat">
+                <span class="text text-secondary text-light">
+                    Pago Mensual
+                </span>
+
+                <span class="text text-main debt-value">
+                    $500.000
+                </span>
+            </div>
+
+            <div class="debt-stat">
+                <span class="text text-secondary text-light">
+                    Meses Restantes
+                </span>
+
+                <span class="text text-main debt-value">
+                    5 Meses
+                </span>
+            </div>
+
+        </div>
+
+        <!-- PROGRESO -->
+        <div class="debt-item-progress">
+
+            <div class="distribution-header">
+                <span class="text text-secondary">
+                    Progreso de pago
+                </span>
+
+                <span class="text text-secondary">
+                    50%
+                </span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill progress-debt" style="width: 50%">
                 </div>
             </div>
+
         </div>
 
-        <div class="debt-item-stats">
-            <div class="debt-stat">
-                <span class="text text-secondary text-light">Total Original</span>
-                <span class="text text-main" style="font-weight: 600;">$5.000.000</span>
-            </div>
-            <div class="debt-stat">
-                <span class="text text-secondary text-light">Restante</span>
-                <span class="text text-main text-debt" style="font-weight: 600;">$2.500.000</span>
-            </div>
-            <div class="debt-stat">
-                <span class="text text-secondary text-light">Pago Mensual</span>
-                <span class="text text-main" style="font-weight: 600;">$500.000</span>
-            </div>
-            <div class="debt-stat">
-                <span class="text text-secondary text-light">Meses Restantes</span>
-                <span class="text text-main" style="font-weight: 600;">5 Meses</span>
-            </div>
-        </div>
-
-        <div class="debt-item-progress">
-            <div class="distribution-header">
-                <span class="text text-secondary">Progreso de pago</span>
-                <span class="text text-secondary">50%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill progress-debt" style="width: 50%"></div>
-            </div>
-        </div>
     </div>
-
-</div>
