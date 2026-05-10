@@ -5,6 +5,8 @@ const plansModal = document.getElementById("plans-modal");
 const paymentModal = document.getElementById("payment-modal");
 const editProfileModal = document.getElementById("edit-profile-modal");
 const deleteProfileModal = document.getElementById("delete-profile-modal");
+const deleteIncomeModal = document.getElementById("delete-income-modal");
+const deleteExpenseModal = document.getElementById("delete-expense-modal");
 
 document.addEventListener("click", (e) => {
 
@@ -88,6 +90,8 @@ document.addEventListener("click", (e) => {
         paymentModal?.classList.add("hidden");
         editProfileModal?.classList.add("hidden");
         deleteProfileModal?.classList.add("hidden");
+        deleteIncomeModal?.classList.add("hidden");
+        deleteExpenseModal?.classList.add("hidden");
     }
 
     // 👤 PERFIL (abrir)
@@ -116,6 +120,12 @@ document.addEventListener("click", (e) => {
         deleteProfileModal?.classList.remove("hidden");
     }
 
+    // 🗑️ ABRIR ELIMINAR GASTO
+    if (e.target.closest("#btn-delete-expense")) {
+
+        deleteExpenseModal?.classList.remove("hidden");
+    }
+
     // ❌ CERRAR EDITAR PERFIL
     if (
         e.target.closest("#btn-cancel-edit-profile")
@@ -130,6 +140,13 @@ document.addEventListener("click", (e) => {
     ) {
 
         deleteProfileModal?.classList.add("hidden");
+    }
+    // ❌ CERRAR ELIMINAR GASTO
+    if (
+        e.target.closest("#btn-cancel-delete-expense")
+    ) {
+
+        deleteExpenseModal?.classList.add("hidden");
     }
 
     // 🚀 LOGIN → ENTRAR APP
@@ -148,5 +165,19 @@ document.addEventListener("click", (e) => {
             ?.classList.add('active');
     }
 
+
+    // 🗑️ ABRIR ELIMINAR INGRESO
+    if (e.target.closest("#btn-delete-income")) {
+
+        deleteIncomeModal?.classList.remove("hidden");
+    }
+
+    // ❌ CERRAR ELIMINAR INGRESO
+    if (
+        e.target.closest("#btn-cancel-delete-income")
+    ) {
+
+        deleteIncomeModal?.classList.add("hidden");
+    }
 
 });

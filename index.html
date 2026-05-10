@@ -67,9 +67,6 @@
                             <img src="assets/icons/trash.svg" class="icon icon-sm icon-expense" id="btn-delete-profile">
                         </button>
 
-                        <button class=" icon-btn">
-                            <img src="assets/icons/config.svg" class="icon icon-sm">
-                        </button>
 
                     </div>
                 </section>
@@ -121,6 +118,11 @@
         </main>
 
     </div>
+
+
+
+
+
 
     <div id="login-modal" class="modal hidden">
         <div class="modal-overlay"></div>
@@ -313,7 +315,7 @@
 
                     <div class="field">
 
-                        <button id="btn-confirm-delete-profile" class="btn btn-base">
+                        <button id="btn-confirm-delete-profile" class="btn btn-expense">
                             Eliminar
                         </button>
 
@@ -539,6 +541,86 @@
 
         </div>
     </div>
+
+    <div id="delete-income-modal" class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">
+                Eliminar ingreso
+            </h2>
+
+            <div class="form form-income active">
+
+                <div class="fields-login">
+
+                    <p class="text text-secondary">
+                        ¿Seguro que deseas eliminar este ingreso?
+                    </p>
+
+                    <div class="field">
+
+                        <button id="btn-confirm-delete-income" class="btn btn-income">
+                            Eliminar
+                        </button>
+
+                        <button id="btn-cancel-delete-income" class="btn btn-base">
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="delete-expense-modal" class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <h2 class="title-main">
+                Eliminar gasto
+            </h2>
+
+            <div class="form form-expense active">
+
+                <div class="fields-login">
+
+                    <p class="text text-secondary">
+                        ¿Seguro que deseas eliminar este gasto?
+                    </p>
+
+                    <div class="field">
+
+                        <button id="btn-confirm-delete-expense" class="btn btn-expense">
+                            Eliminar
+                        </button>
+
+                        <button id="btn-cancel-delete-expense" class="btn btn-base">
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
 
     <script src="assets/js/router.js"></script>
     <script src="assets/js/navigation.js"></script>

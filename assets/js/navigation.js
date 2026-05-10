@@ -57,8 +57,10 @@ document.addEventListener('click', (e) => {
         e.target.closest('#btn-go-login') ||
         e.target.closest('#btn-go-register') ||
         e.target.closest('#btn-go-register-from-login') ||
-        e.target.closest('#btn-add-profiles') || /* 👈 corregido, antes tenía btn-btn */
-        e.target.closest('.profile-add')          /* 👈 también por si clickean el div */
+        e.target.closest('#btn-add-profiles') ||
+        e.target.closest('.profile-add') ||
+        e.target.closest('#btn-edit-profile') ||
+        e.target.closest('#btn-delete-profile')
     ) {
         sidebar.classList.remove('active');
         sidebarOverlay.classList.remove('active');
