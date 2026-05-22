@@ -59,9 +59,16 @@ async function loadPage(page) {
         }
 
         // =========================
-        // 📊 CHARTS (ahora externos)
+        // 📊 CHARTS
         // =========================
         initCharts();
+
+        // =========================
+        // 📦 CARGAR DATOS
+        // =========================
+        if (page === 'home') await loadHomeBalance();
+        if (page === 'ingresos') await loadTransactions('ingreso');
+        if (page === 'gastos') await loadTransactions('gasto');
 
     } catch (error) {
         mainContent.innerHTML = '<p>Error al cargar la página.</p>';

@@ -10,7 +10,21 @@ const deleteExpenseModal = document.getElementById("delete-expense-modal");
 const deleteDebtModal = document.getElementById("delete-debt-modal");
 const deleteSavingsModal = document.getElementById("delete-savings-modal");
 
-document.addEventListener("click", (e) => {
+const getColorModal = (varName) =>
+    getComputedStyle(document.documentElement)
+        .getPropertyValue(varName)
+        .trim();
+
+const paletteModal = [
+    getColorModal('--color-1'),
+    getColorModal('--color-2'),
+    getColorModal('--color-3'),
+    getColorModal('--color-4'),
+    getColorModal('--color-5'),
+    getColorModal('--color-6'),
+];
+
+document.addEventListener("click", async (e) => {
 
     // 🔐 ABRIR LOGIN
     if (e.target.closest("#btn-go-login")) {
@@ -33,9 +47,33 @@ document.addEventListener("click", (e) => {
 
     // 🧾 REGISTRO → PAGO
     if (e.target.closest("#btn-open-payment")) {
+        const name = document.getElementById("register-name")?.value.trim();
+        const lastName = document.getElementById("register-lastname")?.value.trim();
+        const username = document.getElementById("register-username")?.value.trim();
+        const email = document.getElementById("register-email")?.value.trim();
+        const password = document.getElementById("register-password")?.value.trim();
+        const passwordConfirm = document.getElementById("register-password-confirm")?.value.trim();
 
+        if (!name || !lastName || !username || !email || !password) {
+            alert("Por favor completa todos los campos");
+            return;
+        }
+
+        if (password !== passwordConfirm) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
+
+        const randomColor = paletteModal[Math.floor(Math.random() * paletteModal.length)];
+        const res = await apiRegister(name, lastName, username, email, password, randomColor);
+
+        if (res.error) {
+            alert(res.error);
+            return;
+        }
+
+        // Registro exitoso → abrir modal de pago (decorativo)
         registerModal?.classList.add("hidden");
-
         paymentModal?.classList.remove("hidden");
     }
 
@@ -155,12 +193,30 @@ document.addEventListener("click", (e) => {
 
     // 🚀 LOGIN → ENTRAR APP
     if (e.target.closest("#btn-start")) {
-        loginModal?.classList.add("hidden");
+        const email = document.getElementById("login-email")?.value.trim();
+        const password = document.getElementById("login-password")?.value.trim();
 
-        // 🔥 ESTA LÍNEA ES LA CLAVE
+        if (!email || !password) {
+            alert("Por favor ingresa tu correo y contraseña");
+            return;
+        }
+
+        const res = await apiLogin(email, password);
+
+        if (res.error) {
+            alert(res.error);
+            return;
+        }
+
+        // Guardar token y username
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("username", res.username);
+
+        loginModal?.classList.add("hidden");
         document.body.classList.add("logged-in");
 
         loadPage("home");
+        loadProfiles();
 
         document.querySelectorAll('.nav-item')
             .forEach(n => n.classList.remove('active'));

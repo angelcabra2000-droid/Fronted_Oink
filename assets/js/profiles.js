@@ -11,10 +11,6 @@ const palette = [
     getColor('--color-4'),
     getColor('--color-5'),
     getColor('--color-6'),
-    getColor('--color-7'),
-    getColor('--color-8'),
-    getColor('--color-9'),
-    getColor('--color-10'),
 ];
 
 // 🎨 CAMBIAR COLOR GLOBAL
@@ -22,71 +18,90 @@ const setPrimaryColor = (color) => {
     document.documentElement.style.setProperty('--color-primary', color);
 };
 
-document.addEventListener("click", (e) => {
+// ─── CARGAR PERFILES DESDE EL BACKEND ───────────────
+async function loadProfiles() {
+    const list = document.querySelector(".profiles-list");
+    if (!list) return;
 
-    // ➕ CREAR PERFIL
-    if (e.target.closest("#btn-create-profile")) {
+    const res = await apiGetProfiles();
+    if (res.error) return;
 
-        const input = document.getElementById("profile-name");
-        const name = input.value.trim();
+    list.innerHTML = "";
 
-        if (!name) return;
+    res.forEach(profile => {
+        const firstLetter = profile.name.charAt(0).toUpperCase();
+        const div = document.createElement("div");
+        div.classList.add("profile-item");
+        div.dataset.id = profile.id;
+        div.dataset.color = profile.color;
+        div.style.setProperty('--profile-color', profile.color);
 
-        const list = document.querySelector(".profiles-list");
-        if (!list) return;
-
-        const firstLetter = name.charAt(0).toUpperCase();
-
-        const randomColor = palette[Math.floor(Math.random() * palette.length)];
-
-        const newProfile = document.createElement("div");
-        newProfile.classList.add("profile-item");
-
-        newProfile.style.setProperty('--profile-color', randomColor);
-        newProfile.dataset.color = randomColor;
-
-        newProfile.innerHTML = `
-            <div class="profile-avatar" style="background:${randomColor}">
+        div.innerHTML = `
+            <div class="profile-avatar" style="background:${profile.color}">
                 ${firstLetter}
             </div>
-            <span class="text text-main2 text-white">${name}</span>
+            <span class="text text-main2 text-white">${profile.name}</span>
         `;
 
-        list.appendChild(newProfile);
+        list.appendChild(div);
+    });
 
-        input.value = "";
+    // Seleccionar el primero automáticamente
+    const first = list.querySelector(".profile-item");
+    if (first) first.click();
+}
 
-        document.getElementById("profile-modal")?.classList.add("hidden");
-    }
+document.addEventListener("click", async (e) => {
 
     // 👤 SELECCIONAR PERFIL
     if (e.target.closest(".profile-item")) {
-
         const profile = e.target.closest(".profile-item");
         const color = profile.dataset.color;
-
+        const id = profile.dataset.id;
         const name = profile.querySelector("span")?.textContent || "Usuario";
         const firstLetter = name.charAt(0).toUpperCase();
 
-        if (color) {
-            setPrimaryColor(color);
-        }
+        // Guardar profile_id en localStorage
+        localStorage.setItem("profile_id", id);
+
+        // Recargar datos del perfil seleccionado
+        const currentPage = document.querySelector('.nav-item.active')?.dataset.page;
+        if (currentPage === 'home') await loadHomeBalance();
+        if (currentPage === 'ingresos') await loadTransactions('ingreso');
+        if (currentPage === 'gastos') await loadTransactions('gasto');
+
+        if (color) setPrimaryColor(color);
 
         document.querySelectorAll(".profile-item")
             .forEach(p => p.classList.remove("active"));
-
         profile.classList.add("active");
 
         const headerTitle = document.getElementById("header-title");
         const headerAvatar = document.getElementById("header-avatar");
 
-        if (headerTitle) {
-            headerTitle.textContent = `Bienvenido, ${name}`;
-        }
-
+        if (headerTitle) headerTitle.textContent = `Bienvenido, ${name}`;
         if (headerAvatar) {
             headerAvatar.textContent = firstLetter;
             headerAvatar.style.background = color;
         }
+    }
+
+    // ➕ CREAR PERFIL
+    if (e.target.closest("#btn-create-profile")) {
+        const input = document.getElementById("profile-name");
+        const name = input?.value.trim();
+        if (!name) return;
+
+        const randomColor = palette[Math.floor(Math.random() * palette.length)];
+        const res = await apiCreateProfile(name, randomColor);
+
+        if (res.error) {
+            alert(res.error);
+            return;
+        }
+
+        input.value = "";
+        document.getElementById("profile-modal")?.classList.add("hidden");
+        await loadProfiles();
     }
 });

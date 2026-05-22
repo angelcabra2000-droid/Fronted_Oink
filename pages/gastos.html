@@ -2,18 +2,15 @@
     <h2 class="title title-main">Historial de Gastos</h2>
 
     <div class="form form-expense">
-
         <div class="fields">
             <div class="field">
                 <span class="text text-secondary">Nombre</span>
-                <input class="input" placeholder="Nombre">
+                <input id="expense-name" class="input" placeholder="Nombre">
             </div>
-
             <div class="field">
                 <span class="text text-secondary">Monto</span>
-                <input class="input" placeholder="Monto">
+                <input id="expense-amount" class="input" placeholder="Monto" type="number">
             </div>
-
             <div class="field">
                 <span class="text text-secondary">Categoria</span>
                 <select id="categoria-select">
@@ -32,48 +29,16 @@
                     <option value="otro">Otro</option>
                 </select>
             </div>
-
             <div class="field">
                 <span class="text text-secondary">Fecha</span>
-                <input class="input input-date" placeholder="Selecciona una fecha" readonly>
+                <input id="expense-date" class="input input-date" placeholder="Selecciona una fecha" readonly>
             </div>
         </div>
-
         <div class="actions">
-            <button class="btn btn-expense">Guardar</button>
+            <button id="btn-save-expense" class="btn btn-expense">Guardar</button>
             <button class="btn btn-base btn-cancel-expense">Cancelar</button>
         </div>
-
     </div>
 
-    <div class="history-item">
-        <div class="history-item-info">
-            <span class="text text-main" style="font-weight: 600;">Uber</span>
-            <div class="history-item-meta">
-                <button class="icon-btn">
-                    <img src="assets/icons/calendar.svg" class="icon icon-sm">
-                </button>
-                <span class="text text-secondary  text-light">20/02/2026</span>
-                <span class="text text-secondary  text-light">Mensual</span>
-            </div>
-            <div class="history-item-meta">
-                <span class="icon-btn">
-                    <img src="assets/icons/money.svg" class="icon icon-sm ">
-                </span>
-                <span class="text text-secondary  text-light">Categoria</span>
-                <span class="text text-secondary  text-light">Transporte</span>
-            </div>
-        </div>
-        <div class="history-item-actions">
-            <span class="text text-main text-expense" style="font-weight: 600;">$50.000</span>
-            <button class="icon-btn btn-edit-expense">
-                <img src="assets/icons/edit.svg" class="icon icon-sm icon-balance">
-            </button>
-            <button id="btn-delete-expense" class="icon-btn">
-                <img src="assets/icons/trash.svg" class="icon icon-sm icon-expense">
-            </button>
-        </div>
-    </div>
-
-
+    <div id="expense-list"></div>
 </div>
