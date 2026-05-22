@@ -8,7 +8,11 @@ const formatDate = (dateStr) => {
     return d.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' });
 };
 
-// ─── RENDERIZAR ITEM DE TRANSACCIÓN ─────────────────
+// ─── ESTADO ─────────────────────────────────────────
+let editingId = null;
+let pendingDeleteId = null;
+
+// ─── RENDERIZAR ITEM ────────────────────────────────
 function renderTransactionItem(t) {
     const div = document.createElement('div');
     div.classList.add('history-item');
@@ -16,8 +20,6 @@ function renderTransactionItem(t) {
 
     const isIncome = t.type === 'ingreso';
     const colorClass = isIncome ? 'text-income' : 'text-expense';
-    const formClass = isIncome ? 'form-income' : 'form-expense';
-    const btnClass = isIncome ? 'btn-income' : 'btn-expense';
     const btnEdit = isIncome ? 'btn-edit-income' : 'btn-edit-expense';
     const btnDelete = isIncome ? 'btn-delete-income' : 'btn-delete-expense';
 
@@ -40,34 +42,12 @@ function renderTransactionItem(t) {
         </div>
         <div class="history-item-actions">
             <span class="text text-main ${colorClass}" style="font-weight:600">${formatMoney(t.amount)}</span>
-            <button class="icon-btn ${btnEdit}">
+            <button class="icon-btn ${btnEdit}" data-id="${t.id}">
                 <img src="assets/icons/edit.svg" class="icon icon-sm icon-balance">
             </button>
             <button class="icon-btn ${btnDelete}" data-id="${t.id}">
                 <img src="assets/icons/trash.svg" class="icon icon-sm icon-expense">
             </button>
-        </div>
-
-        <!-- Formulario de edición -->
-        <div class="${formClass} edit-form" style="display:none">
-            <div class="fields">
-                <div class="field">
-                    <span class="text text-secondary">Nombre</span>
-                    <input class="input edit-name" value="${t.name}">
-                </div>
-                <div class="field">
-                    <span class="text text-secondary">Monto</span>
-                    <input class="input edit-amount" type="number" value="${t.amount}">
-                </div>
-                <div class="field">
-                    <span class="text text-secondary">Categoría</span>
-                    <input class="input edit-category" value="${t.category || ''}">
-                </div>
-            </div>
-            <div class="actions">
-                <button class="btn ${btnClass} btn-update-transaction">Guardar</button>
-                <button class="btn btn-base btn-cancel-edit">Cancelar</button>
-            </div>
         </div>
     `;
 
@@ -85,6 +65,7 @@ async function loadTransactions(type) {
 
     const filtered = res.transactions.filter(t => t.type === type);
     list.innerHTML = '';
+    editingId = null;
 
     if (filtered.length === 0) {
         list.innerHTML = `<p class="text text-secondary" style="padding:1rem">No hay ${type === 'ingreso' ? 'ingresos' : 'gastos'} registrados.</p>`;
@@ -121,6 +102,49 @@ async function loadHomeBalance() {
     if (savBar) savBar.style.width = `${Math.min(res.savings_percent, 100)}%`;
 }
 
+// ─── LLENAR FORMULARIO PARA EDITAR ──────────────────
+function fillFormForEdit(t) {
+    const isIncome = t.type === 'ingreso';
+
+    if (isIncome) {
+        const nameEl = document.getElementById('income-name');
+        const amountEl = document.getElementById('income-amount');
+        if (nameEl) nameEl.value = t.name;
+        if (amountEl) amountEl.value = t.amount;
+        const btn = document.getElementById('btn-save-income');
+        if (btn) btn.textContent = 'Guardar cambios';
+    } else {
+        const nameEl = document.getElementById('expense-name');
+        const amountEl = document.getElementById('expense-amount');
+        if (nameEl) nameEl.value = t.name;
+        if (amountEl) amountEl.value = t.amount;
+        const btn = document.getElementById('btn-save-expense');
+        if (btn) btn.textContent = 'Guardar cambios';
+    }
+
+    editingId = t.id;
+}
+
+// ─── RESETEAR FORMULARIO ────────────────────────────
+function resetForm(type) {
+    if (type === 'ingreso') {
+        const nameEl = document.getElementById('income-name');
+        const amountEl = document.getElementById('income-amount');
+        if (nameEl) nameEl.value = '';
+        if (amountEl) amountEl.value = '';
+        const btn = document.getElementById('btn-save-income');
+        if (btn) btn.textContent = 'Guardar';
+    } else {
+        const nameEl = document.getElementById('expense-name');
+        const amountEl = document.getElementById('expense-amount');
+        if (nameEl) nameEl.value = '';
+        if (amountEl) amountEl.value = '';
+        const btn = document.getElementById('btn-save-expense');
+        if (btn) btn.textContent = 'Guardar';
+    }
+    editingId = null;
+}
+
 // ─── EVENTOS ─────────────────────────────────────────
 document.addEventListener('click', async (e) => {
 
@@ -129,10 +153,8 @@ document.addEventListener('click', async (e) => {
         const name = document.getElementById('home-income-name')?.value.trim();
         const amount = document.getElementById('home-income-amount')?.value;
         if (!name || !amount) return alert('Nombre y monto son obligatorios');
-
         const res = await apiCreateTransaction('ingreso', name, Number(amount));
         if (res.error) return alert(res.error);
-
         document.getElementById('home-income-name').value = '';
         document.getElementById('home-income-amount').value = '';
         await loadHomeBalance();
@@ -143,81 +165,109 @@ document.addEventListener('click', async (e) => {
         const name = document.getElementById('home-expense-name')?.value.trim();
         const amount = document.getElementById('home-expense-amount')?.value;
         if (!name || !amount) return alert('Nombre y monto son obligatorios');
-
         const res = await apiCreateTransaction('gasto', name, Number(amount));
         if (res.error) return alert(res.error);
-
         document.getElementById('home-expense-name').value = '';
         document.getElementById('home-expense-amount').value = '';
         await loadHomeBalance();
     }
 
-    // ── Guardar ingreso desde página ingresos ──
+    // ── Guardar ingreso (solo editar) ──
     if (e.target.closest('#btn-save-income')) {
+        if (!editingId) return;
         const name = document.getElementById('income-name')?.value.trim();
         const amount = document.getElementById('income-amount')?.value;
+        const category = document.getElementById('categoria-select')?.value;
+        const dateStr = document.getElementById('income-date')?.value;
+
         if (!name || !amount) return alert('Nombre y monto son obligatorios');
 
-        const res = await apiCreateTransaction('ingreso', name, Number(amount));
-        if (res.error) return alert(res.error);
+        const data = { name, amount: Number(amount) };
+        if (category) data.category = category;
+        if (dateStr) {
+            // Convertir de dd/mm/yyyy a ISO
+            const parts = dateStr.split('/');
+            if (parts.length === 3) {
+                data.date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).toISOString();
+            }
+        }
 
-        document.getElementById('income-name').value = '';
-        document.getElementById('income-amount').value = '';
+        const res = await apiUpdateTransaction(editingId, data);
+        if (res.error) return alert(res.error);
+        resetForm('ingreso');
         await loadTransactions('ingreso');
     }
 
-    // ── Guardar gasto desde página gastos ──
+    // ── Guardar gasto (solo editar) ──
     if (e.target.closest('#btn-save-expense')) {
+        if (!editingId) return;
         const name = document.getElementById('expense-name')?.value.trim();
         const amount = document.getElementById('expense-amount')?.value;
+        const category = document.getElementById('categoria-select')?.value;
+        const dateStr = document.getElementById('expense-date')?.value;
+
         if (!name || !amount) return alert('Nombre y monto son obligatorios');
 
-        const res = await apiCreateTransaction('gasto', name, Number(amount));
-        if (res.error) return alert(res.error);
+        const data = { name, amount: Number(amount) };
+        if (category) data.category = category;
+        if (dateStr) {
+            const parts = dateStr.split('/');
+            if (parts.length === 3) {
+                data.date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).toISOString();
+            }
+        }
 
-        document.getElementById('expense-name').value = '';
-        document.getElementById('expense-amount').value = '';
+        const res = await apiUpdateTransaction(editingId, data);
+        if (res.error) return alert(res.error);
+        resetForm('gasto');
         await loadTransactions('gasto');
     }
 
-    // ── Abrir edición ──
-    if (e.target.closest('.btn-edit-income, .btn-edit-expense')) {
-        const item = e.target.closest('.history-item');
-        item?.querySelector('.edit-form')?.style.setProperty('display', 'block');
+    // ── Botón editar ingreso ──
+    if (e.target.closest('.btn-edit-income')) {
+        const id = e.target.closest('[data-id]')?.dataset.id;
+        const res = await apiGetTransactions();
+        const t = res.transactions?.find(t => String(t.id) === String(id));
+        if (t) fillFormForEdit(t);
     }
 
-    // ── Cancelar edición ──
-    if (e.target.closest('.btn-cancel-edit')) {
-        e.target.closest('.edit-form')?.style.setProperty('display', 'none');
+    // ── Botón editar gasto ──
+    if (e.target.closest('.btn-edit-expense')) {
+        const id = e.target.closest('[data-id]')?.dataset.id;
+        const res = await apiGetTransactions();
+        const t = res.transactions?.find(t => String(t.id) === String(id));
+        if (t) fillFormForEdit(t);
     }
 
-    // ── Guardar edición ──
-    if (e.target.closest('.btn-update-transaction')) {
-        const item = e.target.closest('.history-item');
-        const id = item?.dataset.id;
-        const name = item?.querySelector('.edit-name')?.value.trim();
-        const amount = item?.querySelector('.edit-amount')?.value;
-        const category = item?.querySelector('.edit-category')?.value.trim();
+    // ── Botón eliminar ingreso → abrir modal ──
+    if (e.target.closest('.btn-delete-income')) {
+        pendingDeleteId = e.target.closest('[data-id]')?.dataset.id;
+        document.getElementById('delete-income-modal')?.classList.remove('hidden');
+    }
 
-        const res = await apiUpdateTransaction(id, { name, amount: Number(amount), category });
+    // ── Botón eliminar gasto → abrir modal ──
+    if (e.target.closest('.btn-delete-expense')) {
+        pendingDeleteId = e.target.closest('[data-id]')?.dataset.id;
+        document.getElementById('delete-expense-modal')?.classList.remove('hidden');
+    }
+
+    // ── Confirmar eliminar ingreso ──
+    if (e.target.closest('#btn-confirm-delete-income')) {
+        if (!pendingDeleteId) return;
+        const res = await apiDeleteTransaction(pendingDeleteId);
         if (res.error) return alert(res.error);
-
-        // Recargar la lista correcta
-        const type = res.transaction.type;
-        await loadTransactions(type);
+        document.getElementById('delete-income-modal')?.classList.add('hidden');
+        pendingDeleteId = null;
+        await loadTransactions('ingreso');
     }
 
-    // ── Eliminar transacción ──
-    if (e.target.closest('.btn-delete-income, .btn-delete-expense')) {
-        const btn = e.target.closest('[data-id]');
-        const id = btn?.dataset.id;
-        if (!id) return;
-
-        if (!confirm('¿Eliminar esta transacción?')) return;
-
-        const res = await apiDeleteTransaction(id);
+    // ── Confirmar eliminar gasto ──
+    if (e.target.closest('#btn-confirm-delete-expense')) {
+        if (!pendingDeleteId) return;
+        const res = await apiDeleteTransaction(pendingDeleteId);
         if (res.error) return alert(res.error);
-
-        await loadTransactions(res.message.includes('ingreso') ? 'ingreso' : 'gasto');
+        document.getElementById('delete-expense-modal')?.classList.add('hidden');
+        pendingDeleteId = null;
+        await loadTransactions('gasto');
     }
 });
