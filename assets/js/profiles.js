@@ -71,6 +71,7 @@ document.addEventListener("click", async (e) => {
         if (currentPage === 'gastos') await loadTransactions('gasto');
         if (currentPage === 'deudas') await loadDebts();
         if (currentPage === 'ahorro') await loadSavings();
+        if (currentPage === 'analisis') await initCharts();
 
         if (color) setPrimaryColor(color);
 

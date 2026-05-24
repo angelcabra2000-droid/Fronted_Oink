@@ -1,34 +1,59 @@
 .chart-card {
     display: flex;
     flex-direction: column;
-
+    gap: var(--space-md);
     padding: var(--space-lg);
-
     border: 1px solid var(--color-border);
     border-radius: 10px;
-
     width: 100%;
 }
 
+.chart-card .subtitle {
+    margin-bottom: 12px;
+    display: block;
+}
+
 .chart-area {
-    flex: 1;
-    min-height: 200px;
-    /* aquí irá la gráfica */
+    display: none;
 }
 
 .chart-bars {
     display: flex;
-    gap: 10px;
+    align-items: flex-end;
+    gap: 12px;
+    height: 200px;
+    margin-top: 8px;
+    /* separación del título */
+    margin-bottom: 24px;
+    /* espacio para las etiquetas */
 }
 
 .chart-bar-item {
     flex: 1;
+    min-height: 70px;
+    /* más grande */
     height: 80px;
-    border-radius: 10px;
-
+    border-radius: 12px;
+    transition: height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.chart-bar-item::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -22px;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.chart-bar-item .icon-container {
+    transform: scale(0.85);
 }
 
 .chart-bar-item.bg-income {
@@ -43,37 +68,33 @@
     background: var(--color-debt);
 }
 
-.chart-bar-item.bg-balance {
-    background: var(--color-balance);
-}
-
 .chart-bar-item.bg-savings {
     background: var(--color-savings);
 }
 
-/* =========================
-   RESPONSIVE MOBILE GRANDE
-========================= */
 @media (max-width: 768px) {
+    .chart-bars {
+        height: 160px;
+        gap: 8px;
+    }
 
-   .chart-bars {
-      overflow-x: auto;
-   }
+    .chart-bar-item {
+        min-height: 60px;
+        border-radius: 10px;
+    }
 
-   .chart-bar-item {
-      min-width: 50px;
-   }
-
+    .chart-bar-item::after {
+        font-size: 10px;
+        bottom: -20px;
+    }
 }
 
-/* =========================
-   RESPONSIVE MOBILE PEQUEÑO
-========================= */
 @media (max-width: 360px) {
+    .chart-bars {
+        height: 130px;
+    }
 
-   .chart-bar-item {
-      min-width: 40px;
-      height: 60px;
-   }
-
+    .chart-bar-item {
+        min-height: 50px;
+    }
 }

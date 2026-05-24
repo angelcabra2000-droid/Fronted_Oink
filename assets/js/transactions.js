@@ -88,7 +88,8 @@ async function loadHomeBalance() {
     set('home-total-income', formatMoney(res.total_income));
     set('home-total-expenses', formatMoney(res.total_expenses));
     set('home-total-debt', formatMoney(res.total_monthly_debt));
-    set('home-net-balance', formatMoney(res.net_balance));
+    const savings = await apiGetSavings();
+    set('home-net-balance', formatMoney(savings.error ? 0 : (savings.total_assigned ?? 0)));
     set('home-state-income', formatMoney(res.total_income));
     set('home-state-expenses', formatMoney(res.total_expenses));
     set('home-state-debt', formatMoney(res.total_monthly_debt));
@@ -100,6 +101,26 @@ async function loadHomeBalance() {
     const savBar = document.getElementById('home-savings-bar');
     if (expBar) expBar.style.width = `${Math.min(res.expenses_percent, 100)}%`;
     if (savBar) savBar.style.width = `${Math.min(res.savings_percent, 100)}%`;
+
+
+    // Altura de las barras según porcentaje del ingreso
+    const income = res.total_income;
+    const expenses = res.total_expenses;
+    const debt = res.total_monthly_debt;
+    const saving = savings.total_assigned ?? 0;
+
+    const MAX_HEIGHT = 188;
+    const pct = (val) => income > 0 ? Math.min((val / income) * 100, 100) : 0;
+
+    const setBarHeight = (selector, val) => {
+        const el = document.querySelector(selector);
+        if (el) el.style.height = `${(pct(val) / 100) * MAX_HEIGHT}px`;
+    };
+
+    setBarHeight('.chart-bar-item.bg-income', income);
+    setBarHeight('.chart-bar-item.bg-expense', expenses);
+    setBarHeight('.chart-bar-item.bg-debt', debt);
+    setBarHeight('.chart-bar-item.bg-savings', saving);
 }
 
 // ─── LLENAR FORMULARIO PARA EDITAR ──────────────────

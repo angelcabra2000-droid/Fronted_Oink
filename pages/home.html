@@ -41,7 +41,7 @@
 
         <div class="stat-card">
             <div class="stat-card-info">
-                <span class="text text-secondary">Balance</span>
+                <span class="text text-secondary">Ahorro</span>
                 <span id="home-net-balance" class="title title-main title-savings">$0.00</span>
             </div>
             <div class="icon-container">
@@ -129,30 +129,26 @@
     <div class="chart-card">
         <span class="subtitle">Visualización de Presupuesto</span>
 
-        <div class="chart-area">
-            <!-- aquí irá la gráfica con JS -->
-        </div>
-
         <div class="chart-bars">
-            <div class="chart-bar-item bg-income">
+            <div class="chart-bar-item bg-income" data-label="Ingresos">
                 <div class="icon-container">
                     <div class="icon-bg icon-bg-income"></div>
                     <img src="assets/icons/increase.svg" class="icon icon-income">
                 </div>
             </div>
-            <div class="chart-bar-item bg-debt">
-                <div class="icon-container">
-                    <div class="icon-bg icon-bg-debt"></div>
-                    <img src="assets/icons/credit-card.svg" class="icon icon-debt">
-                </div>
-            </div>
-            <div class="chart-bar-item bg-expense">
+            <div class="chart-bar-item bg-expense" data-label="Gastos">
                 <div class="icon-container">
                     <div class="icon-bg icon-bg-expense"></div>
                     <img src="assets/icons/degrowth.svg" class="icon icon-expense">
                 </div>
             </div>
-            <div class="chart-bar-item bg-savings">
+            <div class="chart-bar-item bg-debt" data-label="Deudas">
+                <div class="icon-container">
+                    <div class="icon-bg icon-bg-debt"></div>
+                    <img src="assets/icons/credit-card.svg" class="icon icon-debt">
+                </div>
+            </div>
+            <div class="chart-bar-item bg-savings" data-label="Ahorro">
                 <div class="icon-container">
                     <div class="icon-bg icon-bg-savings"></div>
                     <img src="assets/icons/saving.svg" class="icon icon-savings">

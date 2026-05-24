@@ -64,11 +64,6 @@ async function loadPage(page) {
         }
 
         // =========================
-        // 📊 CHARTS
-        // =========================
-        initCharts();
-
-        // =========================
         // 📦 CARGAR DATOS
         // =========================
         if (page === 'home') await loadHomeBalance();
@@ -76,6 +71,12 @@ async function loadPage(page) {
         if (page === 'gastos') await loadTransactions('gasto');
         if (page === 'deudas') await loadDebts();
         if (page === 'ahorro') await loadSavings();
+        if (page === 'analisis') await initCharts();
+
+        // =========================
+        // 📊 CHARTS (solo para páginas que no son analisis)
+        // =========================
+        if (page !== 'analisis') initCharts();
 
     } catch (error) {
         mainContent.innerHTML = '<p>Error al cargar la página.</p>';

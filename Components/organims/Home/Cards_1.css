@@ -18,13 +18,18 @@
     }
 
     .stats-row-3 {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* La tercera tarjeta ocupa las 2 columnas y se centra */
+    .stats-row-3 .stat-card:last-child {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 5px);
+        margin: 0 auto;
     }
 
     .stats-row-col {
         display: flex;
-        /* 👈 sobreescribe el grid */
         flex-direction: column;
-        /* 👈 apila hacia abajo */
     }
 }
