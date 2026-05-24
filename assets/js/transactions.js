@@ -8,11 +8,9 @@ const formatDate = (dateStr) => {
     return d.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' });
 };
 
-// ─── ESTADO ─────────────────────────────────────────
 let editingId = null;
 let pendingDeleteId = null;
 
-// ─── RENDERIZAR ITEM ────────────────────────────────
 function renderTransactionItem(t) {
     const div = document.createElement('div');
     div.classList.add('history-item');
@@ -54,7 +52,6 @@ function renderTransactionItem(t) {
     return div;
 }
 
-// ─── CARGAR TRANSACCIONES ────────────────────────────
 async function loadTransactions(type) {
     const listId = type === 'ingreso' ? 'income-list' : 'expense-list';
     const list = document.getElementById(listId);
@@ -75,8 +72,19 @@ async function loadTransactions(type) {
     filtered.forEach(t => list.appendChild(renderTransactionItem(t)));
 }
 
-// ─── CARGAR BALANCE EN HOME ──────────────────────────
 async function loadHomeBalance() {
+    const profileName = localStorage.getItem('profile_name') || 'Usuario';
+    const profileColor = localStorage.getItem('profile_color') || '';
+    const firstLetter = profileName.charAt(0).toUpperCase();
+
+    const headerTitle = document.getElementById('header-title');
+    const headerAvatar = document.getElementById('header-avatar');
+    if (headerTitle) headerTitle.textContent = `Bienvenido, ${profileName}`;
+    if (headerAvatar) {
+        headerAvatar.textContent = firstLetter;
+        if (profileColor) headerAvatar.style.background = profileColor;
+    }
+
     const res = await apiGetBalance();
     if (res.error) return;
 
@@ -88,8 +96,10 @@ async function loadHomeBalance() {
     set('home-total-income', formatMoney(res.total_income));
     set('home-total-expenses', formatMoney(res.total_expenses));
     set('home-total-debt', formatMoney(res.total_monthly_debt));
+
     const savings = await apiGetSavings();
     set('home-net-balance', formatMoney(savings.error ? 0 : (savings.total_assigned ?? 0)));
+
     set('home-state-income', formatMoney(res.total_income));
     set('home-state-expenses', formatMoney(res.total_expenses));
     set('home-state-debt', formatMoney(res.total_monthly_debt));
@@ -102,8 +112,6 @@ async function loadHomeBalance() {
     if (expBar) expBar.style.width = `${Math.min(res.expenses_percent, 100)}%`;
     if (savBar) savBar.style.width = `${Math.min(res.savings_percent, 100)}%`;
 
-
-    // Altura de las barras según porcentaje del ingreso
     const income = res.total_income;
     const expenses = res.total_expenses;
     const debt = res.total_monthly_debt;
@@ -123,7 +131,6 @@ async function loadHomeBalance() {
     setBarHeight('.chart-bar-item.bg-savings', saving);
 }
 
-// ─── LLENAR FORMULARIO PARA EDITAR ──────────────────
 function fillFormForEdit(t) {
     const isIncome = t.type === 'ingreso';
 
@@ -146,7 +153,6 @@ function fillFormForEdit(t) {
     editingId = t.id;
 }
 
-// ─── RESETEAR FORMULARIO ────────────────────────────
 function resetForm(type) {
     if (type === 'ingreso') {
         const nameEl = document.getElementById('income-name');
@@ -166,18 +172,18 @@ function resetForm(type) {
     editingId = null;
 }
 
-// ─── EVENTOS ─────────────────────────────────────────
 document.addEventListener('click', async (e) => {
 
     // ── Guardar ingreso desde home ──
     if (e.target.closest('#btn-save-home-income')) {
         const name = document.getElementById('home-income-name')?.value.trim();
         const amount = document.getElementById('home-income-amount')?.value;
-        if (!name || !amount) return alert('Nombre y monto son obligatorios');
+        if (!name || !amount) return showToast('Nombre y monto son obligatorios');
         const res = await apiCreateTransaction('ingreso', name, Number(amount));
-        if (res.error) return alert(res.error);
+        if (res.error) return showToast(res.error);
         document.getElementById('home-income-name').value = '';
         document.getElementById('home-income-amount').value = '';
+        showToast('Ingreso registrado', 'success');
         await loadHomeBalance();
     }
 
@@ -185,15 +191,16 @@ document.addEventListener('click', async (e) => {
     if (e.target.closest('#btn-save-home-expense')) {
         const name = document.getElementById('home-expense-name')?.value.trim();
         const amount = document.getElementById('home-expense-amount')?.value;
-        if (!name || !amount) return alert('Nombre y monto son obligatorios');
+        if (!name || !amount) return showToast('Nombre y monto son obligatorios');
         const res = await apiCreateTransaction('gasto', name, Number(amount));
-        if (res.error) return alert(res.error);
+        if (res.error) return showToast(res.error);
         document.getElementById('home-expense-name').value = '';
         document.getElementById('home-expense-amount').value = '';
+        showToast('Gasto registrado', 'success');
         await loadHomeBalance();
     }
 
-    // ── Guardar ingreso (solo editar) ──
+    // ── Guardar ingreso (editar) ──
     if (e.target.closest('#btn-save-income')) {
         if (!editingId) return;
         const name = document.getElementById('income-name')?.value.trim();
@@ -201,12 +208,11 @@ document.addEventListener('click', async (e) => {
         const category = document.getElementById('categoria-select')?.value;
         const dateStr = document.getElementById('income-date')?.value;
 
-        if (!name || !amount) return alert('Nombre y monto son obligatorios');
+        if (!name || !amount) return showToast('Nombre y monto son obligatorios');
 
         const data = { name, amount: Number(amount) };
         if (category) data.category = category;
         if (dateStr) {
-            // Convertir de dd/mm/yyyy a ISO
             const parts = dateStr.split('/');
             if (parts.length === 3) {
                 data.date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).toISOString();
@@ -214,12 +220,14 @@ document.addEventListener('click', async (e) => {
         }
 
         const res = await apiUpdateTransaction(editingId, data);
-        if (res.error) return alert(res.error);
+        if (res.error) return showToast(res.error);
         resetForm('ingreso');
+        showToast('Ingreso actualizado', 'success');
         await loadTransactions('ingreso');
+        document.querySelector('.form-income.active')?.classList.remove('active');
     }
 
-    // ── Guardar gasto (solo editar) ──
+    // ── Guardar gasto (editar) ──
     if (e.target.closest('#btn-save-expense')) {
         if (!editingId) return;
         const name = document.getElementById('expense-name')?.value.trim();
@@ -227,7 +235,7 @@ document.addEventListener('click', async (e) => {
         const category = document.getElementById('categoria-select')?.value;
         const dateStr = document.getElementById('expense-date')?.value;
 
-        if (!name || !amount) return alert('Nombre y monto son obligatorios');
+        if (!name || !amount) return showToast('Nombre y monto son obligatorios');
 
         const data = { name, amount: Number(amount) };
         if (category) data.category = category;
@@ -239,9 +247,11 @@ document.addEventListener('click', async (e) => {
         }
 
         const res = await apiUpdateTransaction(editingId, data);
-        if (res.error) return alert(res.error);
+        if (res.error) return showToast(res.error);
         resetForm('gasto');
+        showToast('Gasto actualizado', 'success');
         await loadTransactions('gasto');
+        document.querySelector('.form-expense.active')?.classList.remove('active');
     }
 
     // ── Botón editar ingreso ──
@@ -260,13 +270,13 @@ document.addEventListener('click', async (e) => {
         if (t) fillFormForEdit(t);
     }
 
-    // ── Botón eliminar ingreso → abrir modal ──
+    // ── Eliminar ingreso ──
     if (e.target.closest('.btn-delete-income')) {
         pendingDeleteId = e.target.closest('[data-id]')?.dataset.id;
         document.getElementById('delete-income-modal')?.classList.remove('hidden');
     }
 
-    // ── Botón eliminar gasto → abrir modal ──
+    // ── Eliminar gasto ──
     if (e.target.closest('.btn-delete-expense')) {
         pendingDeleteId = e.target.closest('[data-id]')?.dataset.id;
         document.getElementById('delete-expense-modal')?.classList.remove('hidden');
@@ -276,9 +286,10 @@ document.addEventListener('click', async (e) => {
     if (e.target.closest('#btn-confirm-delete-income')) {
         if (!pendingDeleteId) return;
         const res = await apiDeleteTransaction(pendingDeleteId);
-        if (res.error) return alert(res.error);
+        if (res.error) return showToast(res.error);
         document.getElementById('delete-income-modal')?.classList.add('hidden');
         pendingDeleteId = null;
+        showToast('Ingreso eliminado', 'info');
         await loadTransactions('ingreso');
     }
 
@@ -286,9 +297,10 @@ document.addEventListener('click', async (e) => {
     if (e.target.closest('#btn-confirm-delete-expense')) {
         if (!pendingDeleteId) return;
         const res = await apiDeleteTransaction(pendingDeleteId);
-        if (res.error) return alert(res.error);
+        if (res.error) return showToast(res.error);
         document.getElementById('delete-expense-modal')?.classList.add('hidden');
         pendingDeleteId = null;
+        showToast('Gasto eliminado', 'info');
         await loadTransactions('gasto');
     }
 });

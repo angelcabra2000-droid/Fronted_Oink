@@ -66,3 +66,17 @@ document.addEventListener('click', (e) => {
         sidebarOverlay.classList.remove('active');
     }
 });
+
+const passwordInput = document.getElementById('login-password');
+const togglePassword = document.getElementById('toggle-password');
+const eyeIcon = document.getElementById('password-eye-icon');
+
+togglePassword.addEventListener('click', () => {
+    const isHidden = passwordInput.type === 'password';
+
+    passwordInput.type = isHidden ? 'text' : 'password';
+
+    eyeIcon.src = isHidden
+        ? 'assets/icons/eye.svg'
+        : 'assets/icons/eye-slash.svg';
+});

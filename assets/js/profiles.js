@@ -13,12 +13,10 @@ const palette = [
     getColor('--color-6'),
 ];
 
-// 🎨 CAMBIAR COLOR GLOBAL
 const setPrimaryColor = (color) => {
     document.documentElement.style.setProperty('--color-primary', color);
 };
 
-// ─── CARGAR PERFILES DESDE EL BACKEND ───────────────
 async function loadProfiles() {
     const list = document.querySelector(".profiles-list");
     if (!list) return;
@@ -34,6 +32,7 @@ async function loadProfiles() {
         div.classList.add("profile-item");
         div.dataset.id = profile.id;
         div.dataset.color = profile.color;
+        div.dataset.name = profile.name;
         div.style.setProperty('--profile-color', profile.color);
 
         div.innerHTML = `
@@ -46,7 +45,6 @@ async function loadProfiles() {
         list.appendChild(div);
     });
 
-    // Seleccionar el primero automáticamente
     const first = list.querySelector(".profile-item");
     if (first) first.click();
 }
@@ -61,10 +59,10 @@ document.addEventListener("click", async (e) => {
         const name = profile.querySelector("span")?.textContent || "Usuario";
         const firstLetter = name.charAt(0).toUpperCase();
 
-        // Guardar profile_id en localStorage
         localStorage.setItem("profile_id", id);
+        localStorage.setItem("profile_color", color);
+        localStorage.setItem("profile_name", name);
 
-        // Recargar datos del perfil seleccionado
         const currentPage = document.querySelector('.nav-item.active')?.dataset.page;
         if (currentPage === 'home') await loadHomeBalance();
         if (currentPage === 'ingresos') await loadTransactions('ingreso');
@@ -93,18 +91,60 @@ document.addEventListener("click", async (e) => {
     if (e.target.closest("#btn-create-profile")) {
         const input = document.getElementById("profile-name");
         const name = input?.value.trim();
-        if (!name) return;
+        if (!name) return showToast('El nombre no puede estar vacío');
 
         const randomColor = palette[Math.floor(Math.random() * palette.length)];
         const res = await apiCreateProfile(name, randomColor);
 
         if (res.error) {
-            alert(res.error);
+            showToast(res.error);
             return;
         }
 
         input.value = "";
         document.getElementById("profile-modal")?.classList.add("hidden");
+        showToast('Perfil creado correctamente', 'success');
+        await loadProfiles();
+    }
+
+    // ✏️ GUARDAR EDICIÓN DE PERFIL
+    if (e.target.closest("#btn-save-profile")) {
+        const id = localStorage.getItem('profile_id');
+        const name = document.getElementById('edit-profile-name')?.value.trim();
+
+        if (!name) return showToast('El nombre no puede estar vacío');
+
+        const color = localStorage.getItem('profile_color') || palette[0];
+        const res = await apiUpdateProfile(id, name, color);
+
+        if (res.error) {
+            showToast(res.error);
+            return;
+        }
+
+        document.getElementById('edit-profile-name').value = '';
+        document.getElementById('edit-profile-modal')?.classList.add('hidden');
+        showToast('Perfil actualizado correctamente', 'success');
+        await loadProfiles();
+    }
+
+    // 🗑️ CONFIRMAR ELIMINAR PERFIL
+    if (e.target.closest("#btn-confirm-delete-profile")) {
+        const id = localStorage.getItem('profile_id');
+        if (!id) return;
+
+        const res = await apiDeleteProfile(id);
+
+        if (res.error) {
+            showToast(res.error);
+            return;
+        }
+
+        document.getElementById('delete-profile-modal')?.classList.add('hidden');
+        localStorage.removeItem('profile_id');
+        localStorage.removeItem('profile_color');
+        localStorage.removeItem('profile_name');
+        showToast('Perfil eliminado', 'info');
         await loadProfiles();
     }
 });

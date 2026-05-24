@@ -142,9 +142,19 @@
 
                     <div class="field">
                         <span class="text text-secondary">Contraseña</span>
-                        <input id="login-password" class="input" placeholder="Contraseña" type="password">
-                        <span class="text text-secondary text-light link-text" id="btn-forgot-password">¿Olvidaste tu
-                            contraseña?</span>
+
+                        <div class="password-container">
+                            <input id="login-password" class="input" placeholder="Contraseña" type="password">
+
+                            <button type="button" id="toggle-password" class="password-toggle">
+                                <img id="password-eye-icon" src="assets/icons/eye-slash.svg" class="icon icon-sm"
+                                    alt="Mostrar contraseña">
+                            </button>
+                        </div>
+
+                        <span class="text text-secondary text-light link-text" id="btn-forgot-password">
+                            ¿Olvidaste tu contraseña?
+                        </span>
                     </div>
 
 
@@ -656,6 +666,8 @@
             </div>
         </div>
     </div>
+
+    <div id="toast-container"></div>
 
 
 

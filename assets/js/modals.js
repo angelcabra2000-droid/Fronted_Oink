@@ -26,26 +26,20 @@ const paletteModal = [
 
 document.addEventListener("click", async (e) => {
 
-    // 🔐 ABRIR LOGIN
     if (e.target.closest("#btn-go-login")) {
         loginModal?.classList.remove("hidden");
     }
 
-    // 🟣 ABRIR PLANES
     if (e.target.closest("#btn-go-register-from-login")) {
-
         loginModal?.classList.add("hidden");
-
         plansModal?.classList.remove("hidden");
     }
 
-    // 🟣 ABRIR REGISTRO
     if (e.target.closest("#btn-go-register")) {
         loginModal?.classList.add("hidden");
         registerModal?.classList.remove("hidden");
     }
 
-    // 🧾 REGISTRO → PAGO
     if (e.target.closest("#btn-open-payment")) {
         const name = document.getElementById("register-name")?.value.trim();
         const lastName = document.getElementById("register-lastname")?.value.trim();
@@ -55,12 +49,12 @@ document.addEventListener("click", async (e) => {
         const passwordConfirm = document.getElementById("register-password-confirm")?.value.trim();
 
         if (!name || !lastName || !username || !email || !password) {
-            alert("Por favor completa todos los campos");
+            showToast("Por favor completa todos los campos");
             return;
         }
 
         if (password !== passwordConfirm) {
-            alert("Las contraseñas no coinciden");
+            showToast("Las contraseñas no coinciden");
             return;
         }
 
@@ -68,59 +62,44 @@ document.addEventListener("click", async (e) => {
         const res = await apiRegister(name, lastName, username, email, password, randomColor);
 
         if (res.error) {
-            alert(res.error);
+            showToast(res.error);
             return;
         }
 
-        // Registro exitoso → abrir modal de pago (decorativo)
         registerModal?.classList.add("hidden");
         paymentModal?.classList.remove("hidden");
     }
 
-    // 🔙 PAGO → REGISTRO
     if (e.target.closest("#btn-back-register")) {
-
         paymentModal?.classList.add("hidden");
-
         registerModal?.classList.remove("hidden");
     }
 
-    // 🔄 REGISTER → LOGIN
     if (e.target.closest("#btn-go-login-from-register")) {
-
         registerModal?.classList.add("hidden");
-
         loginModal?.classList.remove("hidden");
     }
 
-    // 🔑 OLVIDÉ CONTRASEÑA
     if (e.target.closest("#btn-forgot-password")) {
         loginModal?.classList.add("hidden");
         forgotModal?.classList.remove("hidden");
     }
 
-    // 🔙 VOLVER A LOGIN
     if (e.target.closest("#btn-back-to-login")) {
         forgotModal?.classList.add("hidden");
         loginModal?.classList.remove("hidden");
     }
-    // 💳 PLANES → REGISTRO
+
     if (e.target.closest("#btn-open-register")) {
-
         plansModal?.classList.add("hidden");
-
         registerModal?.classList.remove("hidden");
     }
 
-    // 💳 PAGO → LOGIN
     if (e.target.closest("#btn-finish-payment")) {
-
         paymentModal?.classList.add("hidden");
-
         loginModal?.classList.remove("hidden");
     }
 
-    // ❌ CERRAR TODOS (overlay o X)
     if (e.target.closest(".modal-overlay") || e.target.closest(".modal-close")) {
         loginModal?.classList.add("hidden");
         registerModal?.classList.add("hidden");
@@ -136,12 +115,10 @@ document.addEventListener("click", async (e) => {
         deleteSavingsModal?.classList.add("hidden");
     }
 
-    // 👤 PERFIL (abrir)
     if (e.target.closest(".profile-add")) {
         document.getElementById("profile-modal")?.classList.remove("hidden");
     }
 
-    // 👤 PERFIL (cerrar)
     if (
         e.target.closest("#profile-modal .modal-overlay") ||
         e.target.closest("#profile-modal .modal-close") ||
@@ -150,65 +127,47 @@ document.addEventListener("click", async (e) => {
         document.getElementById("profile-modal")?.classList.add("hidden");
     }
 
-    // ✏️ ABRIR EDITAR PERFIL
     if (e.target.closest("#btn-edit-profile")) {
-
         editProfileModal?.classList.remove("hidden");
     }
 
-    // 🗑️ ABRIR ELIMINAR PERFIL
     if (e.target.closest("#btn-delete-profile")) {
-
         deleteProfileModal?.classList.remove("hidden");
     }
 
-    // 🗑️ ABRIR ELIMINAR GASTO
     if (e.target.closest("#btn-delete-expense")) {
-
         deleteExpenseModal?.classList.remove("hidden");
     }
 
-    // ❌ CERRAR EDITAR PERFIL
-    if (
-        e.target.closest("#btn-cancel-edit-profile")
-    ) {
-
+    if (e.target.closest("#btn-cancel-edit-profile")) {
         editProfileModal?.classList.add("hidden");
     }
 
-    // ❌ CERRAR ELIMINAR PERFIL
-    if (
-        e.target.closest("#btn-cancel-delete-profile")
-    ) {
-
+    if (e.target.closest("#btn-cancel-delete-profile")) {
         deleteProfileModal?.classList.add("hidden");
     }
-    // ❌ CERRAR ELIMINAR GASTO
-    if (
-        e.target.closest("#btn-cancel-delete-expense")
-    ) {
 
+    if (e.target.closest("#btn-cancel-delete-expense")) {
         deleteExpenseModal?.classList.add("hidden");
     }
 
-    // 🚀 LOGIN → ENTRAR APP
+    // 🚀 LOGIN
     if (e.target.closest("#btn-start")) {
         const email = document.getElementById("login-email")?.value.trim();
         const password = document.getElementById("login-password")?.value.trim();
 
         if (!email || !password) {
-            alert("Por favor ingresa tu correo y contraseña");
+            showToast("Por favor ingresa tu correo y contraseña");
             return;
         }
 
         const res = await apiLogin(email, password);
 
         if (res.error) {
-            alert(res.error);
+            showToast(res.error);
             return;
         }
 
-        // Guardar token y username
         localStorage.setItem("token", res.token);
         localStorage.setItem("username", res.username);
 
@@ -220,46 +179,68 @@ document.addEventListener("click", async (e) => {
 
         document.querySelectorAll('.nav-item')
             .forEach(n => n.classList.remove('active'));
-
         document.querySelector('[data-page="home"]')
             ?.classList.add('active');
     }
 
-
-    // 🗑️ ABRIR ELIMINAR INGRESO
     if (e.target.closest("#btn-delete-income")) {
-
         deleteIncomeModal?.classList.remove("hidden");
     }
 
-    // ❌ CERRAR ELIMINAR INGRESO
-    if (
-        e.target.closest("#btn-cancel-delete-income")
-    ) {
-
+    if (e.target.closest("#btn-cancel-delete-income")) {
         deleteIncomeModal?.classList.add("hidden");
     }
 
-    // 🗑️ ABRIR ELIMINAR DEUDA
     if (e.target.closest(".btn-delete-debt")) {
         deleteDebtModal?.classList.remove("hidden");
     }
 
-    // ❌ CERRAR ELIMINAR DEUDA
     if (e.target.closest("#btn-cancel-delete-debt")) {
         deleteDebtModal?.classList.add("hidden");
     }
 
-
-    // 🗑️ ABRIR ELIMINAR AHORRO
     if (e.target.closest(".btn-delete-savings")) {
         deleteSavingsModal?.classList.remove("hidden");
     }
 
-
-    // ❌ CERRAR ELIMINAR AHORRO
     if (e.target.closest("#btn-cancel-delete-savings")) {
         deleteSavingsModal?.classList.add("hidden");
     }
-
 });
+
+// ─── TOAST NOTIFICATIONS ────────────────────────────
+function showToast(message, type = 'error') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.classList.add('toast', `toast-${type}`);
+
+    const icons = {
+        error: 'assets/icons/trash.svg',
+        success: 'assets/icons/check.svg',
+        info: 'assets/icons/money.svg',
+    };
+
+    toast.innerHTML = `
+        <div class="toast-icon">
+            <img src="${icons[type]}" class="icon icon-sm">
+        </div>
+        <span class="text text-main2">${message}</span>
+        <button class="toast-close icon-btn">
+            <img src="assets/icons/close.svg" class="icon icon-sm">
+        </button>
+    `;
+
+    toast.querySelector('.toast-close').addEventListener('click', () => {
+        toast.classList.add('toast-hide');
+        setTimeout(() => toast.remove(), 300);
+    });
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('toast-hide');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
