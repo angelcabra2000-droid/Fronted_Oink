@@ -49,6 +49,11 @@ async function loadPage(page) {
             new TomSelect(selectEditEl, { create: false });
         }
 
+        const debtCategoryEl = document.querySelector('#debt-category-select');
+        if (debtCategoryEl) {
+            new TomSelect(debtCategoryEl, { create: false });
+        }
+
         const dateEditEl = document.querySelector('.input-date-edit');
         if (dateEditEl) {
             flatpickr(dateEditEl, {
@@ -69,6 +74,8 @@ async function loadPage(page) {
         if (page === 'home') await loadHomeBalance();
         if (page === 'ingresos') await loadTransactions('ingreso');
         if (page === 'gastos') await loadTransactions('gasto');
+        if (page === 'deudas') await loadDebts();
+        if (page === 'ahorro') await loadSavings();
 
     } catch (error) {
         mainContent.innerHTML = '<p>Error al cargar la página.</p>';

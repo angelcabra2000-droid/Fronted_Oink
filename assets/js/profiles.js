@@ -69,6 +69,8 @@ document.addEventListener("click", async (e) => {
         if (currentPage === 'home') await loadHomeBalance();
         if (currentPage === 'ingresos') await loadTransactions('ingreso');
         if (currentPage === 'gastos') await loadTransactions('gasto');
+        if (currentPage === 'deudas') await loadDebts();
+        if (currentPage === 'ahorro') await loadSavings();
 
         if (color) setPrimaryColor(color);
 
