@@ -53,7 +53,7 @@ function renderDebtItem(d) {
             </div>
             <div class="debt-stat">
                 <span class="text text-secondary text-light">Meses Restantes</span>
-                <span class="text text-main debt-value">${d.months_left} Meses</span>
+                <span class="text text-main debt-value">${d.installments_left} Cuotas</span>
             </div>
         </div>
 
@@ -201,172 +201,266 @@ document.addEventListener('click', async (e) => {
 
     // ── Guardar nueva deuda ──
     if (e.target.closest('#btn-save-debt')) {
-        const name = document.getElementById('debt-name')?.value.trim();
-        const total = document.getElementById('debt-total')?.value;
-        const remaining = document.getElementById('debt-remaining')?.value;
-        const category = document.getElementById('debt-category')?.value;
-        const dateStr = document.getElementById('debt-date')?.value;
-        const interest = document.getElementById('debt-interest')?.value;
 
-        if (!name || !total) return showToast('Nombre y monto total son obligatorios');
+        const name =
+            document.getElementById('debt-name')?.value.trim();
+
+        const total =
+            document.getElementById('debt-total')?.value;
+
+        const remaining =
+            document.getElementById('debt-remaining')?.value;
+
+        const installments =
+            document.getElementById('debt-installments')?.value;
+
+        const installmentsPaid =
+            document.getElementById('debt-installments-paid')?.value;
+
+        const category =
+            document.getElementById('debt-category-select')?.value;
+
+        const dateStr =
+            document.getElementById('debt-date')?.value;
+
+        const interest =
+            document.getElementById('debt-interest')?.value;
+
+        if (!name || !total) {
+            return showToast(
+                'Nombre y monto total son obligatorios'
+            );
+        }
+
+        if (!installments || Number(installments) < 1) {
+            return showToast(
+                'Debe ingresar un número de cuotas válido'
+            );
+        }
+
+        if (Number(installmentsPaid || 0) < 0) {
+            return showToast(
+                'Las cuotas pagadas no pueden ser negativas'
+            );
+        }
+
+        if (
+            Number(installmentsPaid || 0) >
+            Number(installments)
+        ) {
+            return showToast(
+                'Las cuotas pagadas no pueden superar las cuotas totales'
+            );
+        }
 
         const data = {
             name,
             total_amount: Number(total),
             remaining: Number(remaining || total),
             category: category || '',
-            interest: Number(interest || 0)
+            interest: Number(interest || 0),
+            total_installments: Number(installments),
+            installments_paid: Number(installmentsPaid || 0)
         };
 
         if (dateStr) {
             const parts = dateStr.split('/');
+
             if (parts.length === 3) {
-                data.due_date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).toISOString();
+                data.due_date = new Date(
+                    `${parts[2]}-${parts[1]}-${parts[0]}`
+                ).toISOString();
             }
         }
 
+        console.log('Enviando deuda:', data);
+
         const res = await apiCreateDebt(data);
-        if (res.error) return showToast(res.error);
+
+        if (res.error) {
+            return showToast(res.error);
+        }
 
         document.getElementById('debt-name').value = '';
         document.getElementById('debt-total').value = '';
         document.getElementById('debt-remaining').value = '';
+        document.getElementById('debt-installments').value = '';
+        document.getElementById('debt-installments-paid').value = '0';
         document.getElementById('debt-interest').value = '';
+
         document.getElementById('form-create-debt').style.display = 'none';
-        showToast('Deuda creada correctamente', 'success');
+
+        showToast(
+            'Deuda creada correctamente',
+            'success'
+        );
+
         await loadDebts();
     }
+
+    const data = {
+        name,
+        total_amount: Number(total),
+        remaining: Number(remaining || total),
+        category: category || '',
+        interest: Number(interest || 0),
+        total_installments: Number(installments),
+        installments_paid: Number(installmentsPaid || 0)
+    };
+
+    console.log(data);
+
+    if (dateStr) {
+        const parts = dateStr.split('/');
+        if (parts.length === 3) {
+            data.due_date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).toISOString();
+        }
+    }
+
+    console.log(data);
+
+    const res = await apiCreateDebt(data);
+    if (res.error) return showToast(res.error);
+
+    document.getElementById('debt-name').value = '';
+    document.getElementById('debt-total').value = '';
+    document.getElementById('debt-remaining').value = '';
+    document.getElementById('debt-interest').value = '';
+    document.getElementById('form-create-debt').style.display = 'none';
+    showToast('Deuda creada correctamente', 'success');
+    await loadDebts();
+}
 
     // ── Abrir edición deuda ──
     if (e.target.closest('.btn-edit-debt')) {
-        const item = e.target.closest('.debt-item');
-        item?.querySelector('.edit-debt-form')?.style.setProperty('display', 'block');
+    const item = e.target.closest('.debt-item');
+    item?.querySelector('.edit-debt-form')?.style.setProperty('display', 'block');
+}
+
+// ── Cancelar edición deuda ──
+if (e.target.closest('.btn-cancel-edit-debt')) {
+    e.target.closest('.edit-debt-form')?.style.setProperty('display', 'none');
+}
+
+// ── Guardar edición deuda ──
+if (e.target.closest('.btn-update-debt')) {
+    const item = e.target.closest('.debt-item');
+    const id = item?.dataset.id;
+    const name = item?.querySelector('.edit-debt-name')?.value.trim();
+    const remaining = item?.querySelector('.edit-debt-remaining')?.value;
+    const interest = item?.querySelector('.edit-debt-interest')?.value;
+
+    const res = await apiUpdateDebt(id, {
+        name,
+        remaining: Number(remaining),
+        interest: Number(interest)
+    });
+    if (res.error) return showToast(res.error);
+
+    item?.querySelector('.edit-debt-form')?.style.setProperty('display', 'none');
+    showToast('Deuda actualizada', 'success');
+    await loadDebts();
+}
+
+// ── Eliminar deuda → abrir modal ──
+if (e.target.closest('.btn-delete-debt')) {
+    pendingDeleteDebtId = e.target.closest('[data-id]')?.dataset.id;
+    document.getElementById('delete-debt-modal')?.classList.remove('hidden');
+}
+
+// ── Confirmar eliminar deuda ──
+if (e.target.closest('#btn-confirm-delete-debt')) {
+    if (!pendingDeleteDebtId) return;
+    const res = await apiDeleteDebt(pendingDeleteDebtId);
+    if (res.error) return showToast(res.error);
+    document.getElementById('delete-debt-modal')?.classList.add('hidden');
+    pendingDeleteDebtId = null;
+    showToast('Deuda eliminada', 'info');
+    await loadDebts();
+}
+
+// ── Registrar pago deuda ──
+if (e.target.closest('.btn-pay-debt')) {
+    const id = e.target.closest('[data-id]')?.dataset.id;
+    const res = await apiPayDebt(id);
+    if (res.error) return showToast(res.error);
+    if (res.paid) {
+        showToast('¡Deuda pagada completamente!', 'success');
+    } else {
+        showToast('Pago registrado', 'success');
     }
+    await loadDebts();
+}
 
-    // ── Cancelar edición deuda ──
-    if (e.target.closest('.btn-cancel-edit-debt')) {
-        e.target.closest('.edit-debt-form')?.style.setProperty('display', 'none');
-    }
+// ── Mostrar formulario crear ahorro ──
+if (e.target.closest('.btn-add-savings')) {
+    const form = document.getElementById('form-create-savings');
+    if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
 
-    // ── Guardar edición deuda ──
-    if (e.target.closest('.btn-update-debt')) {
-        const item = e.target.closest('.debt-item');
-        const id = item?.dataset.id;
-        const name = item?.querySelector('.edit-debt-name')?.value.trim();
-        const remaining = item?.querySelector('.edit-debt-remaining')?.value;
-        const interest = item?.querySelector('.edit-debt-interest')?.value;
+// ── Cancelar crear ahorro ──
+if (e.target.closest('.btn-cancel-savings')) {
+    const form = document.getElementById('form-create-savings');
+    if (form) form.style.display = 'none';
+}
 
-        const res = await apiUpdateDebt(id, {
-            name,
-            remaining: Number(remaining),
-            interest: Number(interest)
-        });
-        if (res.error) return showToast(res.error);
+// ── Guardar nuevo ahorro ──
+if (e.target.closest('#btn-save-saving')) {
+    const name = document.getElementById('saving-name')?.value.trim();
+    const percentage = document.getElementById('saving-percentage')?.value;
 
-        item?.querySelector('.edit-debt-form')?.style.setProperty('display', 'none');
-        showToast('Deuda actualizada', 'success');
-        await loadDebts();
-    }
+    if (!name || !percentage) return showToast('Nombre y porcentaje son obligatorios');
 
-    // ── Eliminar deuda → abrir modal ──
-    if (e.target.closest('.btn-delete-debt')) {
-        pendingDeleteDebtId = e.target.closest('[data-id]')?.dataset.id;
-        document.getElementById('delete-debt-modal')?.classList.remove('hidden');
-    }
+    const res = await apiCreateSaving(name, Number(percentage));
+    if (res.error) return showToast(res.error);
 
-    // ── Confirmar eliminar deuda ──
-    if (e.target.closest('#btn-confirm-delete-debt')) {
-        if (!pendingDeleteDebtId) return;
-        const res = await apiDeleteDebt(pendingDeleteDebtId);
-        if (res.error) return showToast(res.error);
-        document.getElementById('delete-debt-modal')?.classList.add('hidden');
-        pendingDeleteDebtId = null;
-        showToast('Deuda eliminada', 'info');
-        await loadDebts();
-    }
+    document.getElementById('saving-name').value = '';
+    document.getElementById('saving-percentage').value = '';
+    document.getElementById('form-create-savings').style.display = 'none';
+    showToast('Ahorro creado correctamente', 'success');
+    await loadSavings();
+}
 
-    // ── Registrar pago deuda ──
-    if (e.target.closest('.btn-pay-debt')) {
-        const id = e.target.closest('[data-id]')?.dataset.id;
-        const res = await apiPayDebt(id);
-        if (res.error) return showToast(res.error);
-        if (res.paid) {
-            showToast('¡Deuda pagada completamente!', 'success');
-        } else {
-            showToast('Pago registrado', 'success');
-        }
-        await loadDebts();
-    }
+// ── Abrir edición ahorro ──
+if (e.target.closest('.btn-edit-saving')) {
+    const item = e.target.closest('.history-item');
+    item?.querySelector('.edit-saving-form')?.style.setProperty('display', 'block');
+}
 
-    // ── Mostrar formulario crear ahorro ──
-    if (e.target.closest('.btn-add-savings')) {
-        const form = document.getElementById('form-create-savings');
-        if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
+// ── Cancelar edición ahorro ──
+if (e.target.closest('.btn-cancel-edit-saving')) {
+    e.target.closest('.edit-saving-form')?.style.setProperty('display', 'none');
+}
 
-    // ── Cancelar crear ahorro ──
-    if (e.target.closest('.btn-cancel-savings')) {
-        const form = document.getElementById('form-create-savings');
-        if (form) form.style.display = 'none';
-    }
+// ── Guardar edición ahorro ──
+if (e.target.closest('.btn-update-saving')) {
+    const item = e.target.closest('.history-item');
+    const id = item?.dataset.id;
+    const name = item?.querySelector('.edit-saving-name')?.value.trim();
+    const percentage = item?.querySelector('.edit-saving-percentage')?.value;
 
-    // ── Guardar nuevo ahorro ──
-    if (e.target.closest('#btn-save-saving')) {
-        const name = document.getElementById('saving-name')?.value.trim();
-        const percentage = document.getElementById('saving-percentage')?.value;
+    const res = await apiUpdateSaving(id, name, Number(percentage));
+    if (res.error) return showToast(res.error);
 
-        if (!name || !percentage) return showToast('Nombre y porcentaje son obligatorios');
+    item?.querySelector('.edit-saving-form')?.style.setProperty('display', 'none');
+    showToast('Ahorro actualizado', 'success');
+    await loadSavings();
+}
 
-        const res = await apiCreateSaving(name, Number(percentage));
-        if (res.error) return showToast(res.error);
+// ── Eliminar ahorro → abrir modal ──
+if (e.target.closest('.btn-delete-saving')) {
+    pendingDeleteSavingId = e.target.closest('[data-id]')?.dataset.id;
+    document.getElementById('delete-savings-modal')?.classList.remove('hidden');
+}
 
-        document.getElementById('saving-name').value = '';
-        document.getElementById('saving-percentage').value = '';
-        document.getElementById('form-create-savings').style.display = 'none';
-        showToast('Ahorro creado correctamente', 'success');
-        await loadSavings();
-    }
-
-    // ── Abrir edición ahorro ──
-    if (e.target.closest('.btn-edit-saving')) {
-        const item = e.target.closest('.history-item');
-        item?.querySelector('.edit-saving-form')?.style.setProperty('display', 'block');
-    }
-
-    // ── Cancelar edición ahorro ──
-    if (e.target.closest('.btn-cancel-edit-saving')) {
-        e.target.closest('.edit-saving-form')?.style.setProperty('display', 'none');
-    }
-
-    // ── Guardar edición ahorro ──
-    if (e.target.closest('.btn-update-saving')) {
-        const item = e.target.closest('.history-item');
-        const id = item?.dataset.id;
-        const name = item?.querySelector('.edit-saving-name')?.value.trim();
-        const percentage = item?.querySelector('.edit-saving-percentage')?.value;
-
-        const res = await apiUpdateSaving(id, name, Number(percentage));
-        if (res.error) return showToast(res.error);
-
-        item?.querySelector('.edit-saving-form')?.style.setProperty('display', 'none');
-        showToast('Ahorro actualizado', 'success');
-        await loadSavings();
-    }
-
-    // ── Eliminar ahorro → abrir modal ──
-    if (e.target.closest('.btn-delete-saving')) {
-        pendingDeleteSavingId = e.target.closest('[data-id]')?.dataset.id;
-        document.getElementById('delete-savings-modal')?.classList.remove('hidden');
-    }
-
-    // ── Confirmar eliminar ahorro ──
-    if (e.target.closest('#btn-confirm-delete-savings')) {
-        if (!pendingDeleteSavingId) return;
-        const res = await apiDeleteSaving(pendingDeleteSavingId);
-        if (res.error) return showToast(res.error);
-        document.getElementById('delete-savings-modal')?.classList.add('hidden');
-        pendingDeleteSavingId = null;
-        showToast('Ahorro eliminado', 'info');
-        await loadSavings();
-    }
+// ── Confirmar eliminar ahorro ──
+if (e.target.closest('#btn-confirm-delete-savings')) {
+    if (!pendingDeleteSavingId) return;
+    const res = await apiDeleteSaving(pendingDeleteSavingId);
+    if (res.error) return showToast(res.error);
+    document.getElementById('delete-savings-modal')?.classList.add('hidden');
+    pendingDeleteSavingId = null;
+    showToast('Ahorro eliminado', 'info');
+    await loadSavings();
+}
 });
